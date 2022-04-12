@@ -1,10 +1,12 @@
 package tetris_game;
 
+import java.awt.Color;
+
 public class main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hello");
+		Tile test = new FallingTile(Color.BLACK, 1, 1);
+		System.out.println(test.isNull());
 	}
 
 }
