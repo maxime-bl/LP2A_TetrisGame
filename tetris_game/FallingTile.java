@@ -22,8 +22,4 @@ public class FallingTile extends Tile {
 	public Color getColor() {
 		return this.color;
 	}
-	
-	public String toString() {
-		return ""+color+"   "+coordinates[0] + coordinates[1];
-	}
 }
