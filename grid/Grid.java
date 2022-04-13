@@ -44,4 +44,12 @@ public class Grid {
 	public Tile getTile(Vector vect) {
 		return table.get(vect.getY()).getLine()[vect.getX()];
 	}
+	
+	public Tile getTile(int posHeight, int posWidth) {
+		return table.get(posHeight).getLine()[posWidth];
+	}
+	
+	public void display() {
+		
+	}
 }
