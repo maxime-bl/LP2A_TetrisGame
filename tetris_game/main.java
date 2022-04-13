@@ -2,6 +2,8 @@ package tetris_game;
 
 import java.awt.Color;
 
+import tetrominos.Tile;
+
 public class main {
 
 	public static void main(String[] args) {

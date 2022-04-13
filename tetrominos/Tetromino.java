@@ -1,7 +1,9 @@
-package tetris_game;
+package tetrominos;
 
 import java.awt.Color;
 import java.util.ArrayList;
+
+import tetris_game.FallingTile;
 
 public abstract class Tetromino {
 
@@ -15,10 +17,10 @@ public abstract class Tetromino {
 		centerTile = new FallingTile();
 	}
 	
-	public Tetromino(Color color) {
+	public Tetromino(Color color, int posHorizontal, int posVertical) {
 		this.tiles = new ArrayList<FallingTile>();
 		this.color = color;
-		this.centerTile = new FallingTile(color);
+		this.centerTile = new FallingTile(color, posHorizontal, posVertical);
 	}
 	
 	public Color getColor() {

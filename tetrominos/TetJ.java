@@ -1,11 +1,11 @@
-package tetris_game;
+package tetrominos;
 
 import java.awt.Color;
 
 public class TetJ extends Tetromino {
 	
 	public TetJ() {
-		super(Color.BLUE);
+		super(Color.BLUE, 1, 1);
 		
 	}
 	

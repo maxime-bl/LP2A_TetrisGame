@@ -1,4 +1,4 @@
-package tetris_game;
+package tetrominos;
 
 public class TetS {
 

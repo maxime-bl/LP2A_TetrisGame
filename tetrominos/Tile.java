@@ -1,7 +1,10 @@
-package tetris_game;
+package tetrominos;
 
 import java.awt.Color;
 
+/*
+ *	The tile class represent one tile composing a tetromino
+ */
 public class Tile {
 
 	private Color color;

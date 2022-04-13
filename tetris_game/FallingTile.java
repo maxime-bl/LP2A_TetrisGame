@@ -2,6 +2,8 @@ package tetris_game;
 
 import java.awt.Color;
 
+import tetrominos.Tile;
+
 public class FallingTile extends Tile {
 	
 //	[vertical axis, horizontal axis]
@@ -9,6 +11,7 @@ public class FallingTile extends Tile {
 	private Color color;
 	
 	public FallingTile() {
+		super(Color.BLACK);
 		this.color = Color.BLACK;
 	}
 	
