@@ -1,4 +1,4 @@
-package tetrominos;
+package tiles;
 
 import java.awt.Color;
 

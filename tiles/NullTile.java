@@ -1,8 +1,6 @@
-package tetris_game;
+package tiles;
 
 import java.awt.Color;
-
-import tetrominos.Tile;
 
 public class NullTile extends Tile {
 

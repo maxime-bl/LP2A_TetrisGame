@@ -1,12 +1,10 @@
-package tetris_game;
+package tiles;
 
 import java.awt.Color;
 
-import tetrominos.Tile;
-
 public class FallingTile extends Tile {
 	
-//	[vertical axis, horizontal axis]
+//	[horizontal axis, vertical axis]
 	private int[] coordinates = new int[2];
 	private Color color;
 	
@@ -18,8 +16,8 @@ public class FallingTile extends Tile {
 	public FallingTile(Color color, int posHorizontal, int posVertical) {
 		super(color);
 		this.color = color;
-		this.coordinates[0] = posVertical;
-		this.coordinates[1] = posHorizontal;
+		this.coordinates[1] = posVertical;
+		this.coordinates[0] = posHorizontal;
 	}
 	
 	public Color getColor() {

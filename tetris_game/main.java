@@ -2,12 +2,13 @@ package tetris_game;
 
 import java.awt.Color;
 
-import tetrominos.Tile;
+import tiles.FallingTile;
+import tiles.Tile;
 
 public class main {
 
 	public static void main(String[] args) {
-		Tile test = new FallingTile(Color.BLACK, 1, 1);
+		Tile test = new FallingTile(Color.BLUE, 1, 1);
 		System.out.println(test.isNull());
 	}
 

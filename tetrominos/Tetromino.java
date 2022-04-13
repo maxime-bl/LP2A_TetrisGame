@@ -3,7 +3,7 @@ package tetrominos;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import tetris_game.FallingTile;
+import tiles.FallingTile;
 
 public abstract class Tetromino {
 
