@@ -1,28 +1,21 @@
 package tetrominos;
 
+import tiles.FallingTile;
 import utils.*;
 
 public class TetJ extends Tetromino {
 	
 	public TetJ() {
-		super(ColorConstants.BLUE, 5, 15);
-		
+		super(ColorConstants.BLUE, SpawningCoord.x, SpawningCoord.y);
+		super.tiles.add(centerTile);
+		super.tiles.add(new FallingTile(ColorConstants.YELLOW, SpawningCoord.x-1, SpawningCoord.y+1));
+		super.tiles.add(new FallingTile(ColorConstants.YELLOW, SpawningCoord.x-1, SpawningCoord.y));
+		super.tiles.add(new FallingTile(ColorConstants.YELLOW, SpawningCoord.x+1, SpawningCoord.y));
 	}
 	
 	@Override
 	protected boolean hasCollided() {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public void rotateLeft() {
-		
-	}
-	
-	@Override
-	protected void rotateRight() {
-		// TODO Auto-generated method stub
-		
 	}
 }

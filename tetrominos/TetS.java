@@ -13,17 +13,4 @@ public class TetS extends Tetromino {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	protected void rotateLeft() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void rotateRight() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
