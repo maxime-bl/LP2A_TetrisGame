@@ -1,10 +1,14 @@
 package tiles;
 
-import java.awt.Color;
+import utils.*;
 
 public class NullTile extends Tile {
 
-	private Color color = Color.BLACK;
+	private Color color;
+	
+	public NullTile() {
+		color = new Color(ColorConstants.BLACK);
+	}
 	
 	public boolean isNull() {
 		return true;

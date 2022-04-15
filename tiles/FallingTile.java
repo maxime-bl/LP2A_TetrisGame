@@ -1,8 +1,6 @@
 package tiles;
 
-import utils.Vector;
-
-import java.awt.Color;
+import utils.*;
 
 public class FallingTile extends Tile {
 	
@@ -11,8 +9,8 @@ public class FallingTile extends Tile {
 	private Color color;
 	
 	public FallingTile() {
-		super(Color.BLACK);
-		this.color = Color.BLACK;
+		super(new Color(ColorConstants.BLACK));
+		this.color = new Color(ColorConstants.BLACK);
 	}
 	
 	public FallingTile(Color color, int posHorizontal, int posVertical) {

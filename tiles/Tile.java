@@ -14,8 +14,8 @@ public class Tile {
 		this.color = new Color(ColorConstants.BLACK);
 	}
 	
-	public Tile(int[] color) {
-		this.color = new Color(color);
+	public Tile(Color color) {
+		this.color = color;
 	}
 
 	public Color getColor() {
