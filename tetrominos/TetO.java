@@ -20,13 +20,11 @@ public class TetO extends Tetromino {
 
 	@Override
 	protected void rotateLeft() {
-		// TODO Auto-generated method stub
-		
+		// The coordinates of the tetromino O aren't modified when it's rotated.
 	}
 
 	@Override
 	protected void rotateRight() {
-		// TODO Auto-generated method stub
-		
+		// The coordinates of the tetromino O aren't modified when it's rotated.
 	}
 }
