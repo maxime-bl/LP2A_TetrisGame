@@ -7,7 +7,7 @@ public class NullTile extends Tile {
 	private Color color;
 	
 	public NullTile() {
-		color = new Color(ColorConstants.BLACK);
+		color = ColorConstants.BLACK;
 	}
 	
 	public boolean isNull() {

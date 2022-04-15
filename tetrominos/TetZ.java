@@ -1,12 +1,10 @@
 package tetrominos;
 
-import utils.Color;
-import utils.ColorConstants;
-
+import utils.*;
 public class TetZ extends Tetromino{
 
 	public TetZ() {
-		super(new Color(ColorConstants.RED), 5, 15);
+		super(ColorConstants.RED, 5, 15);
 	}
 
 	@Override

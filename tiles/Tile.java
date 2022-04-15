@@ -11,7 +11,7 @@ public class Tile {
 	private Color color;
 
 	public Tile() {
-		this.color = new Color(ColorConstants.BLACK);
+		this.color = ColorConstants.BLACK;
 	}
 	
 	public Tile(Color color) {

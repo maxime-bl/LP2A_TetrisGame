@@ -13,7 +13,7 @@ public abstract class Tetromino {
 	
 	public Tetromino() {
 		this.tiles = new ArrayList<FallingTile>();
-		this.color = new Color(ColorConstants.BLACK);
+		this.color = ColorConstants.BLACK;
 		centerTile = new FallingTile();
 	}
 	

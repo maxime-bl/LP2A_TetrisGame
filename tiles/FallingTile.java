@@ -9,8 +9,8 @@ public class FallingTile extends Tile {
 	private Color color;
 	
 	public FallingTile() {
-		super(new Color(ColorConstants.BLACK));
-		this.color = new Color(ColorConstants.BLACK);
+		super(ColorConstants.BLACK);
+		this.color = ColorConstants.BLACK;
 	}
 	
 	public FallingTile(Color color, int posHorizontal, int posVertical) {

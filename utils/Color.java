@@ -1,12 +1,12 @@
 package utils;
 
-public class Color implements ColorConstants{
+public class Color{
 	public int r, g, b;
 	
-	public Color(int[] color) {
-		this.r = color[0];
-		this.g = color[1];
-		this.b = color[2];
+	public Color(int r, int g, int b) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
 	}
 	
 	public Color() {
