@@ -9,4 +9,8 @@ public class NullTile extends Tile {
 	public boolean isNull() {
 		return true;
 	}
+	
+	public Color getColor() {
+		return this.color;
+	}
 }
