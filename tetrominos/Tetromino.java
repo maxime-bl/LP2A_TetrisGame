@@ -2,8 +2,10 @@ package tetrominos;
 
 import java.util.ArrayList;
 
+import processing.core.*;
 import utils.*;
 import tiles.FallingTile;
+import tiles.Tile;
 
 public abstract class Tetromino {
 
@@ -39,7 +41,15 @@ public abstract class Tetromino {
 		
 	}
 	
-	public void draw() {
-		
+	public void display(PApplet w) {
+		for (FallingTile t : tiles) {
+			int x = t.getCoordinates().getX();
+			int y = t.getCoordinates().getY();
+			
+			w.push();
+			w.translate(x*Tile.SIZE,(19-y)*Tile.SIZE);
+			t.display(w);
+			w.pop();
+		}
 	}
 }

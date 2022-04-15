@@ -7,7 +7,7 @@ import utils.*;
  *	The tile class represent one tile composing a tetromino
  */
 public class Tile {
-
+	public static final int SIZE = 25;
 	private Color color;
 
 	public Tile() {
