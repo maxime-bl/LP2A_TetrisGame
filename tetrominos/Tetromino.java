@@ -1,8 +1,8 @@
 package tetrominos;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
+import utils.*;
 import tiles.FallingTile;
 
 public abstract class Tetromino {
@@ -13,7 +13,7 @@ public abstract class Tetromino {
 	
 	public Tetromino() {
 		this.tiles = new ArrayList<FallingTile>();
-		this.color = Color.BLACK;
+		this.color = new Color(ColorConstants.BLACK);
 		centerTile = new FallingTile();
 	}
 	

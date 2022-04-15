@@ -1,11 +1,12 @@
 package tetrominos;
 
-import java.awt.Color;
+import utils.Color;
+import utils.ColorConstants;
 
 public class TetJ extends Tetromino {
 	
 	public TetJ() {
-		super(Color.BLUE, 1, 1);
+		super(new Color(ColorConstants.BLUE), 5, 15);
 		
 	}
 	

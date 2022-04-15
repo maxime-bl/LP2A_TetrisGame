@@ -10,13 +10,13 @@ import utils.*;
 public class Game extends PApplet{
 	private int windowWidth = 1280, windowHeight = 720;
 	private Scene currentScene;
-	Tile tile1 = new Tile(ColorConstants.GREEN);
-	Tile tile2 = new Tile(ColorConstants.BLUE);
-	Tile tile3 = new Tile(ColorConstants.YELLOW);
-	Tile tile4 = new Tile(ColorConstants.PURPLE);
-	Tile tile5 = new Tile(ColorConstants.SKY_BLUE);
-	Tile tile6 = new Tile(ColorConstants.ORANGE);
-	Tile tile7 = new Tile(ColorConstants.RED);
+	Tile tile1 = new Tile(new Color(ColorConstants.GREEN));
+	Tile tile2 = new Tile(new Color(ColorConstants.BLUE));
+	Tile tile3 = new Tile(new Color(ColorConstants.YELLOW));
+	Tile tile4 = new Tile(new Color(ColorConstants.PURPLE));
+	Tile tile5 = new Tile(new Color(ColorConstants.SKY_BLUE));
+	Tile tile6 = new Tile(new Color(ColorConstants.ORANGE));
+	Tile tile7 = new Tile(new Color(ColorConstants.RED));
 
 	public static void main(String[] args) {
 		PApplet.main("tetris_game.Game");
