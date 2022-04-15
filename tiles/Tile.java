@@ -1,5 +1,6 @@
 package tiles;
 
+import processing.core.PApplet;
 import utils.*;
 
 /*
@@ -7,17 +8,17 @@ import utils.*;
  */
 public class Tile {
 
-	private int color[];
+	private Color color;
 
 	public Tile() {
-		this.color = ColorConstants.GREEN;
+		this.color = new Color(ColorConstants.BLACK);
 	}
 	
-	public Tile(Color color) {
-		this.color = color;
+	public Tile(int[] color) {
+		this.color = new Color(color);
 	}
 
-	public int[] getColor() {
+	public Color getColor() {
 		return color;
 	}	
 	
@@ -51,6 +52,6 @@ public class Tile {
 	}
 	
 	public boolean isNull() {
-		return this.color == Color.BLACK;
+		return color.getRed() == 0 && color.getGreen() == 0 && color.getBlue() == 0;
 	}
 }
