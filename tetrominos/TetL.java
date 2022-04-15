@@ -8,9 +8,9 @@ public class TetL extends Tetromino {
 	public TetL() {
 		super(ColorConstants.ORANGE, SpawningCoord.x, SpawningCoord.y);
 		super.tiles.add(centerTile);
-		super.tiles.add(new FallingTile(ColorConstants.YELLOW, SpawningCoord.x+1, SpawningCoord.y+1));
-		super.tiles.add(new FallingTile(ColorConstants.YELLOW, SpawningCoord.x+1, SpawningCoord.y));
-		super.tiles.add(new FallingTile(ColorConstants.YELLOW, SpawningCoord.x-1, SpawningCoord.y));
+		super.tiles.add(new FallingTile(ColorConstants.ORANGE, SpawningCoord.x+1, SpawningCoord.y+1));
+		super.tiles.add(new FallingTile(ColorConstants.ORANGE, SpawningCoord.x+1, SpawningCoord.y));
+		super.tiles.add(new FallingTile(ColorConstants.ORANGE, SpawningCoord.x-1, SpawningCoord.y));
 	}
 
 	@Override

@@ -1,11 +1,16 @@
 package tetrominos;
 
+import tiles.FallingTile;
 import utils.*;
 
 public class TetI extends Tetromino {
 
 	public TetI() {
-		super(ColorConstants.SKY_BLUE, 5, 15);
+		super(ColorConstants.SKY_BLUE, SpawningCoord.x, SpawningCoord.y);
+		super.tiles.add(centerTile);
+		super.tiles.add(new FallingTile(ColorConstants.SKY_BLUE, SpawningCoord.x-1, SpawningCoord.y));
+		super.tiles.add(new FallingTile(ColorConstants.SKY_BLUE, SpawningCoord.x+1, SpawningCoord.y));
+		super.tiles.add(new FallingTile(ColorConstants.SKY_BLUE, SpawningCoord.x+2, SpawningCoord.y));
 	}
 
 	@Override

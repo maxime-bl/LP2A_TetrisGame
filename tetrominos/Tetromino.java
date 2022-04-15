@@ -36,7 +36,7 @@ public abstract class Tetromino {
 			Vector centerCoord = centerTile.getCoordinates();
 			Vector ftCoord = ft.getCoordinates();
 			Vector newCoord = new Vector(centerCoord.getX()+(centerCoord.getY()-ftCoord.getY()),
-					centerCoord.getY()-(centerCoord.getX()-ftCoord.getY()));
+					centerCoord.getY()-(centerCoord.getX()-ftCoord.getX()));
 			ft.setCoordinates(newCoord);
 		}
 	}
@@ -46,7 +46,7 @@ public abstract class Tetromino {
 			Vector centerCoord = centerTile.getCoordinates();
 			Vector ftCoord = ft.getCoordinates();
 			Vector newCoord = new Vector(centerCoord.getX()-(centerCoord.getY()-ftCoord.getY()),
-					centerCoord.getY()+(centerCoord.getX()-ftCoord.getY()));
+					centerCoord.getY()+(centerCoord.getX()-ftCoord.getX()));
 			ft.setCoordinates(newCoord);
 		}
 	}
