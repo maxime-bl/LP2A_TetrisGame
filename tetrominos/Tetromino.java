@@ -30,8 +30,26 @@ public abstract class Tetromino {
 	}
 	
 	protected abstract boolean hasCollided();
-	protected abstract void rotateLeft();
-	protected abstract void rotateRight();
+	
+	protected void rotateLeft() {
+		for (FallingTile ft: tiles) {
+			Vector centerCoord = centerTile.getCoordinates();
+			Vector ftCoord = ft.getCoordinates();
+			Vector newCoord = new Vector(centerCoord.getX()+(centerCoord.getY()-ftCoord.getY()),
+					centerCoord.getY()-(centerCoord.getX()-ftCoord.getY()));
+			ft.setCoordinates(newCoord);
+		}
+	}
+	
+	protected void rotateRight() {
+		for (FallingTile ft: tiles) {
+			Vector centerCoord = centerTile.getCoordinates();
+			Vector ftCoord = ft.getCoordinates();
+			Vector newCoord = new Vector(centerCoord.getX()-(centerCoord.getY()-ftCoord.getY()),
+					centerCoord.getY()+(centerCoord.getX()-ftCoord.getY()));
+			ft.setCoordinates(newCoord);
+		}
+	}
 	
 	public void update() {
 		
