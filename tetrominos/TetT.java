@@ -1,11 +1,15 @@
 package tetrominos;
 
+import tiles.FallingTile;
 import utils.*;
 
 public class TetT extends Tetromino {
 
 	public TetT() {
-		super(ColorConstants.PURPLE, 5, 15);
+		super(ColorConstants.PURPLE, SpawningCoord.x, SpawningCoord.y);
+		super.tiles.add(new FallingTile(ColorConstants.PURPLE, SpawningCoord.x-1, SpawningCoord.y));
+		super.tiles.add(new FallingTile(ColorConstants.PURPLE, SpawningCoord.x, SpawningCoord.y+1));
+		super.tiles.add(new FallingTile(ColorConstants.PURPLE, SpawningCoord.x+1, SpawningCoord.y));
 	}
 	
 	@Override
@@ -13,17 +17,4 @@ public class TetT extends Tetromino {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	protected void rotateLeft() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void rotateRight() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
