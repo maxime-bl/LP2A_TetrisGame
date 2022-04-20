@@ -4,10 +4,9 @@ import scenes.gamescene.ScoreManager;
 
 import processing.core.*;
 import scenes.Scene;
-import scenes.gamescene.GameScene;
+import scenes.gamescene.*;
 import tetrominos.*;
-import tiles.FallingTile;
-import tiles.Tile;
+import tiles.*;
 import utils.*;
 
 public class Game extends PApplet{
@@ -15,6 +14,7 @@ public class Game extends PApplet{
 	private Scene currentScene;
 	
 	private ScoreManager score = new ScoreManager(250);
+	Grid grid = new Grid();
 	Tile tile1 = new Tile(ColorConstants.GREEN);
 	Tile tile2 = new Tile(ColorConstants.BLUE);
 	Tile tile3 = new Tile(ColorConstants.YELLOW);
@@ -40,16 +40,17 @@ public class Game extends PApplet{
 	
 	//called every 1/60 of second
 	public void draw() {
-		background(0);
-		score.display(this);
-		
-		/*
 		push();
+		background(0);
+		grid.display(this);
+		pop();
+		/*
+		
 		//translate(50,50);
 		Tetromino t = new TetI();
 		t.display(this);
 		
-		pop();*/
+		*/
 		
 	}
 	

@@ -1,7 +1,7 @@
 package utils;
 
 public class Color{
-	public int r, g, b;
+	private int r, g, b;
 	
 	public Color(int r, int g, int b) {
 		this.r = r;

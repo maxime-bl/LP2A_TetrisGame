@@ -3,7 +3,9 @@ package scenes.gamescene;
 import java.util.ArrayList;
 import java.util.List;
 
-import tiles.Tile;
+import processing.core.*;
+import tiles.*;
+import utils.ColorConstants;
 import utils.Vector;
 
 public class Grid {
@@ -37,6 +39,11 @@ public class Grid {
 		for (int i = 0; i < this.height; i++) {
 			table.add(new Line(width));
 		}
+		for (Line line : table) {
+			for (int i = 0; i < this.width; i++) {
+				line.getLine()[i] = new NullTile();
+			}
+		}
 	}
 	
 	public Tile getTile(Vector vect) {
@@ -47,13 +54,13 @@ public class Grid {
 		return table.get(posHeight).getLine()[posWidth];
 	}
 	
-	public void checkLines(int width) {
+	public void checkLines() {
 		int nbLines = 0;
 		int index = 0;
 		boolean isFull = true;
 		
 		for (Line l: table) {
-			for (int i = 0; i < width; i++) {
+			for (int i = 0; i < this.width; i++) {
 				if (l.getLine()[i].isNull()) {
 					isFull = false;
 				}
@@ -61,7 +68,7 @@ public class Grid {
 			if (isFull) {
 				nbLines++;
 				table.remove(index);
-				table.add(new Line(width));
+				table.add(new Line(this.width));
 			}
 			isFull = true;
 			index++;
@@ -69,7 +76,27 @@ public class Grid {
 		ScoreManager.update(nbLines);
 	}
 	
-	public void display() {
+	public void display(PApplet w) {
+		w.push();
 		
+		int r = ColorConstants.CYAN.getRed();
+		int g = ColorConstants.CYAN.getGreen();
+		int b = ColorConstants.CYAN.getBlue();
+		
+		w.fill(r,g,b);
+		w.rect(0, 0, Tile.SIZE*this.width+10, Tile.SIZE*this.height+10);
+		
+		w.translate(5f, 5f);
+		w.noStroke();
+		
+		for (Line line : table) {
+			for (int i = 0; i < this.width; i++) {
+				line.getLine()[i].display(w);;
+				w.translate(Tile.SIZE, 0);
+			}
+			w.translate(-width*Tile.SIZE, Tile.SIZE);
+		}
+		
+		w.pop();
 	}
 }
