@@ -15,10 +15,10 @@ public class GameScene implements Scene {
 	private ScoreManager scoreManager;
 	private float fallingTime;
 	private float lastFallingTime;
-	private booolean hasSwapped;
+	private boolean hasSwapped;
 	
 	public GameScene() {
-		queue = new TetQueue(3);
+		queue = new TetQueue(5);
 		holder = new TetHolder();
 		currentTet = queue.getNext();
 		scoreManager = new ScoreManager(0);
@@ -48,12 +48,12 @@ public class GameScene implements Scene {
 		w.push();
 		
 		w.translate(70,70);
-		//holder.display(w);
+		holder.display(w);
 		
 		w.translate(25 + 4 * Tile.SIZE, 0);
 		grid.display(w);
 		
-		w.translate(10 + 10*Tile.SIZE, fallingTime);
+		w.translate(10 + 10*Tile.SIZE, 0);
 		queue.display(w);
 		
 		w.translate(-40, 300);
