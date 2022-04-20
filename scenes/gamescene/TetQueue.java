@@ -67,7 +67,7 @@ public class TetQueue {
 		
 		
 		//display the shapes
-		w.translate(-8 * Tile.SIZE + 10, Tile.SIZE+25);
+		w.translate(-4 * Tile.SIZE + 10, Tile.SIZE+25);
 		
 		int i=0;
 		for (Tetromino t : this.queue) {

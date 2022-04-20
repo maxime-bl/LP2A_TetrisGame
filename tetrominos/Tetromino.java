@@ -94,7 +94,7 @@ public abstract class Tetromino {
 			int y = t.getCoordinates().getY();
 			
 			w.push();
-			w.translate(-(7*Tile.SIZE+10), 2*Tile.SIZE);
+			w.translate(-(3*Tile.SIZE+10), 2*Tile.SIZE);
 			w.translate(x*Tile.SIZE,(19-y)*Tile.SIZE);
 			t.display(w);
 			w.pop();

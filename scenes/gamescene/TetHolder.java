@@ -1,9 +1,7 @@
 package scenes.gamescene;
 
 import processing.core.*;
-import scenes.gamescene.Grid.Line;
 import tetrominos.Tetromino;
-import tiles.Tile;
 import utils.ColorConstants;
 
 public class TetHolder {
