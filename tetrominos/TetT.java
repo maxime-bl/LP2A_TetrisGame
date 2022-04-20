@@ -13,9 +13,4 @@ public class TetT extends Tetromino {
 		super.tiles.add(new FallingTile(ColorConstants.PURPLE, SpawningCoord.x+1, SpawningCoord.y));
 	}
 	
-	@Override
-	protected boolean hasCollided() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
