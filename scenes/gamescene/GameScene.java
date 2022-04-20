@@ -45,7 +45,7 @@ public class GameScene implements Scene {
 				hasSwapped = false;
 				currentTet = queue.getNext();
 			} else {
-				//currentTet.fall();
+				currentTet.fall();
 			}
 			lastFallingMillis = System.currentTimeMillis();
 		} 
