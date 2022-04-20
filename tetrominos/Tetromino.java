@@ -89,10 +89,12 @@ public abstract class Tetromino {
 			int x = t.getCoordinates().getX();
 			int y = t.getCoordinates().getY();
 			
-			w.push();
-			w.translate(x*Tile.SIZE,(19-y)*Tile.SIZE);
-			t.display(w);
-			w.pop();
+			if (y<20) {
+				w.push();
+				w.translate(x*Tile.SIZE,(19-y)*Tile.SIZE);
+				t.display(w);
+				w.pop();
+			}
 		}
 	}
 	
