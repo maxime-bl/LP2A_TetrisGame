@@ -1,5 +1,5 @@
 package utils;
 
 public interface SpawningCoord {
-	public final int x = 9, y = 18;
+	public final int x = 4, y = 18;
 }

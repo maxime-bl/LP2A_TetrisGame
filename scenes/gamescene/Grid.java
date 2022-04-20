@@ -50,7 +50,7 @@ public class Grid {
 		return table.get(vect.getY()).getLine()[vect.getX()];
 	}
 	
-	public Tile getTile(int posHeight, int posWidth) {
+	public Tile getTile(int posWidth, int posHeight) {
 		return table.get(posHeight).getLine()[posWidth];
 	}
 	

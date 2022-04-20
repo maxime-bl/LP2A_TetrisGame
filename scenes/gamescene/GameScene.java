@@ -65,6 +65,10 @@ public class GameScene implements Scene {
 		
 		w.translate(25 + 4 * Tile.SIZE, 0);
 		grid.display(w);
+		w.push();
+		w.translate(5,5);
+		currentTet.display(w);
+		w.pop();
 		
 		w.translate(10 + 10*Tile.SIZE, 0);
 		queue.display(w);
