@@ -31,7 +31,7 @@ public abstract class Tetromino {
 		return this.color;
 	}
 	
-	protected boolean hasCollided(Grid grid) {
+	public boolean hasCollided(Grid grid) {
 		boolean isColliding = false;
 		
 		for (FallingTile t : this.tiles) {
@@ -72,7 +72,7 @@ public abstract class Tetromino {
 		
 	}
 	
-	private void makeStatic() {
+	public void makeStatic() {
 		
 	}
 	
