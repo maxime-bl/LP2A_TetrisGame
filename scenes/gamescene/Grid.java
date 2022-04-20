@@ -98,9 +98,9 @@ public class Grid {
 		for (Line line : table) {
 			for (int i = 0; i < this.width; i++) {
 				line.getLine()[i].display(w);;
-				w.translate(-Tile.SIZE, 0);
+				w.translate(Tile.SIZE, 0);
 			}
-			w.translate(-width*Tile.SIZE, Tile.SIZE);
+			w.translate(-width*Tile.SIZE, -Tile.SIZE);
 		}
 		
 		w.pop();
