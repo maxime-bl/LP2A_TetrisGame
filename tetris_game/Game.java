@@ -43,7 +43,11 @@ public class Game extends PApplet{
 	
 	//called every 1/60 of second
 	public void draw() {
-		push();
+		currentScene.processInput(this);
+		currentScene.update();
+		currentScene.render(this);
+		
+		/*push();
 		background(0);
 		
 		hold.display(this);
@@ -52,13 +56,13 @@ public class Game extends PApplet{
 		
 		grid.display(this);
 		pop();
-		/*
 		
 		//translate(50,50);
 		Tetromino t = new TetI();
 		t.display(this);
 		
 		*/
+		
 		
 	}
 	
