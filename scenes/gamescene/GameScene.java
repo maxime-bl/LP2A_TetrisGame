@@ -14,10 +14,10 @@ public class GameScene implements Scene {
 	private Grid grid;
 	private ScoreManager scoreManager;
 	private long fallingTime;
-	private long lastFallingMillis;
+	private long lastFallingMillis, lastInputMillis;
 	private boolean hasSwapped;
 	private int minDelayBeetwenFalls;
-	private boolean isSoftDropPressed;
+	private boolean isSoftDropPressed, wasKeyPressed;
 	
 	public GameScene() {
 		queue = new TetQueue(5);
@@ -26,7 +26,7 @@ public class GameScene implements Scene {
 		scoreManager = new ScoreManager(0);
 		grid = new Grid();		
 		fallingTime = 300;
-		lastFallingMillis = 0;
+		lastFallingMillis = lastInputMillis = 0;
 		hasSwapped = false;
 		minDelayBeetwenFalls = 100;
 		isSoftDropPressed = false;
@@ -35,9 +35,26 @@ public class GameScene implements Scene {
 
 	@Override
 	public void processInput(PApplet w) {
-		//soft fall
-		//if (w.keyPre)
+		if (w.keyPressed && !wasKeyPressed) {
+			if (w.keyCode == w.DOWN) isSoftDropPressed = true;
+			if (w.keyCode == w.CONTROL || w.key == 'w' || w.key == 'W') currentTet.rotateLeft();
+			if (w.keyCode == w.UP || w.key == 'x' || w.key == 'X') currentTet.rotateRight();
+			if (w.keyCode == w.LEFT) currentTet.moveLeft();
+			if (w.keyCode == w.RIGHT) currentTet.moveRight();
+			if (w.key == ' ') { 
+				//hard drop//
+			}
+		} else {
+			if (w.keyCode == w.DOWN) {
+				isSoftDropPressed = false;
+			}
+		}
 		
+		if (isSoftDropPressed && System.currentTimeMillis() > lastFallingMillis + minDelayBeetwenFalls) {
+			currentTet.fall();
+		}
+		
+		wasKeyPressed = w.keyPressed;
 	}
 
 	@Override
@@ -54,7 +71,7 @@ public class GameScene implements Scene {
 		} 
 		
 		//check for complete lines
-		
+		grid.checkLines();
 	}
 
 	@Override
