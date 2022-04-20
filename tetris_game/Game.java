@@ -1,5 +1,6 @@
 package tetris_game;
 
+import scenes.gamescene.ScoreManager;
 
 import processing.core.*;
 import scenes.Scene;
@@ -12,6 +13,8 @@ import utils.*;
 public class Game extends PApplet{
 	private int windowWidth = 1280, windowHeight = 720;
 	private Scene currentScene;
+	
+	private ScoreManager score = new ScoreManager(250);
 	Tile tile1 = new Tile(ColorConstants.GREEN);
 	Tile tile2 = new Tile(ColorConstants.BLUE);
 	Tile tile3 = new Tile(ColorConstants.YELLOW);
@@ -37,10 +40,10 @@ public class Game extends PApplet{
 	
 	//called every 1/60 of second
 	public void draw() {
+		background(0);
+		score.display(this);
 		
-		
-		/*background(0);
-		
+		/*
 		push();
 		//translate(50,50);
 		Tetromino t = new TetI();
