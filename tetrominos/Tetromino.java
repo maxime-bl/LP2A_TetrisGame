@@ -1,8 +1,10 @@
 package tetrominos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import processing.core.*;
+import scenes.gamescene.Grid;
 import utils.*;
 import tiles.FallingTile;
 import tiles.Tile;
@@ -29,9 +31,24 @@ public abstract class Tetromino {
 		return this.color;
 	}
 	
-	protected abstract boolean hasCollided();
+	protected boolean hasCollided(Grid grid) {
+		boolean isColliding = false;
+		
+		for (FallingTile t : this.tiles) {
+			
+			if (t.getCoordinates().getY() == 0) {
+				isColliding = true;
+				break;
+			} else if (grid.getTile(t.getCoordinates().getX(), t.getCoordinates().getY()-1).isNull() == false) {
+				isColliding = true;
+				break;
+			}
+		}
+		
+		return isColliding;
+	}
 	
-	protected void rotateLeft() {
+	public void rotateLeft() {
 		for (FallingTile ft: tiles) {
 			Vector centerCoord = centerTile.getCoordinates();
 			Vector ftCoord = ft.getCoordinates();
@@ -41,7 +58,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	protected void rotateRight() {
+	public void rotateRight() {
 		for (FallingTile ft: tiles) {
 			Vector centerCoord = centerTile.getCoordinates();
 			Vector ftCoord = ft.getCoordinates();

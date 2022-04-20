@@ -1,4 +1,4 @@
-package grid;
+package scenes.gamescene;
 
 import java.util.ArrayList;
 import java.util.List;
