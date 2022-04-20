@@ -93,11 +93,12 @@ public class Grid {
 		w.rect(0, 0, Tile.SIZE*this.width+10, Tile.SIZE*this.height+10);
 		
 		w.translate(5f, 5f);
-
+		
+		w.translate(0, 20*Tile.SIZE);
 		for (Line line : table) {
 			for (int i = 0; i < this.width; i++) {
 				line.getLine()[i].display(w);;
-				w.translate(Tile.SIZE, 0);
+				w.translate(-Tile.SIZE, 0);
 			}
 			w.translate(-width*Tile.SIZE, Tile.SIZE);
 		}
