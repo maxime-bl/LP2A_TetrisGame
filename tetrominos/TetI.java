@@ -21,13 +21,27 @@ public class TetI extends Tetromino {
 
 	@Override
 	protected void rotateLeft() {
-		// TODO Auto-generated method stub
-		
+		super.rotateLeft();
+		for (FallingTile ft: tiles) {
+			Vector newCoord = ft.getCoordinates();
+			newCoord.setY(newCoord.getY()-1);
+			ft.setCoordinates(newCoord);
+		}
 	}
 
 	@Override
 	protected void rotateRight() {
-		// TODO Auto-generated method stub
-		
+		// Maximum coordinate over X or Y is used as a referential to do the rotation
+		int max = 0;
+		for (FallingTile ft: tiles) {
+			if (max < Math.max(ft.getCoordinates().getX(), ft.getCoordinates().getY())) {
+				max = Math.max(ft.getCoordinates().getX(), ft.getCoordinates().getY());
+			}
+		}
+		for (FallingTile ft: tiles) {
+			Vector ftCoord = ft.getCoordinates();
+			Vector newCoord = new Vector(ftCoord.getY(),max -(max-ftCoord.getX()));
+			ft.setCoordinates(newCoord);
+		}
 	}
 }
