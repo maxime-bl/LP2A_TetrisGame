@@ -58,26 +58,36 @@ public class Grid {
 		table.get(posHeight).getLine()[posWidth] = tile;
 	}
 	
-	public void checkLines() {
+	public boolean checkLines() {
 		int nbLines = 0;
 		int index = 0;
 		boolean isFull = true;
+		boolean isLost = false;
 		
 		for (Line l: table) {
-			for (int i = 0; i < this.width; i++) {
-				if (l.getLine()[i].isNull()) {
-					isFull = false;
+			if (index < 20) {
+				for (int i = 0; i < this.width; i++) {
+					if (l.getLine()[i].isNull()) {
+						isFull = false;
+					}
+				}
+				if (isFull) {
+					nbLines++;
+					table.remove(index);
+					table.add(new Line(this.width));
+				}
+				isFull = true;
+				index++;
+			} else {
+				for (int i = 0; i < this.width; i++) {
+					if ( l.getLine()[i].isNull() == false) {
+						isLost = true;
+					}
 				}
 			}
-			if (isFull) {
-				nbLines++;
-				table.remove(index);
-				table.add(new Line(this.width));
-			}
-			isFull = true;
-			index++;
 		}
 		ScoreManager.update(nbLines);
+		return isLost;
 	}
 	
 	public void display(PApplet w) {
