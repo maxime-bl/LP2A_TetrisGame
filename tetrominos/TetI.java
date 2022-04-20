@@ -54,4 +54,17 @@ public class TetI extends Tetromino {
 		this.translationR.setX(-translationR.getY());
 		this.translationR.setY(translationR.getX());
 	}
+
+
+	@Override
+	protected Tetromino clone() {
+		Tetromino clone = new TetI();
+		clone.centerTile = this.centerTile;
+		for (int i = 0; i < 4; i++) {
+			clone.tiles.get(i).setCoordinates(this.tiles.get(i).getCoordinates());
+		}
+		return clone;
+	}
+	
+	
 }

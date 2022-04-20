@@ -13,4 +13,14 @@ public class TetL extends Tetromino {
 		super.tiles.add(new FallingTile(ColorConstants.ORANGE, SpawningCoord.x-1, SpawningCoord.y));
 	}
 
+	@Override
+	protected Tetromino clone() {
+		Tetromino clone = new TetL();
+		clone.centerTile = this.centerTile;
+		for (int i = 0; i < 4; i++) {
+			clone.tiles.get(i).setCoordinates(this.tiles.get(i).getCoordinates());
+		}
+		return clone;
+	}
+
 }

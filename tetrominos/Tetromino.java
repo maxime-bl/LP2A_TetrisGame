@@ -82,7 +82,7 @@ public abstract class Tetromino {
 	 * @param grid : Grid
 	 * @return boolean
 	 */
-	protected boolean rotationTest(int direction, Grid grid) throws CloneNotSupportedException {
+	protected boolean rotationTest(int direction, Grid grid) {
 		boolean isPossible = true;
 		//Check if the right rotation is possible
 		if (direction == 1) {
@@ -211,8 +211,8 @@ public abstract class Tetromino {
 	 * Method used to simulate rotation of the tetromino
 	 * @return preview: the simulated tetromino
 	 */
-	protected Tetromino rotateLeftPrev() throws CloneNotSupportedException {
-		Tetromino preview = (Tetromino) this.clone();
+	protected Tetromino rotateLeftPrev() {
+		Tetromino preview = this.clone();
 		for (FallingTile ft: preview.tiles) {
 			Vector centerCoord = centerTile.getCoordinates();
 			Vector ftCoord = ft.getCoordinates();
@@ -227,8 +227,8 @@ public abstract class Tetromino {
 	 * Method used to simulate rotation of the tetromino
 	 * @return preview: the simulated tetromino
 	 */
-	protected Tetromino rotateRightPrev() throws CloneNotSupportedException {
-		Tetromino preview = (Tetromino) this.clone();
+	protected Tetromino rotateRightPrev() {
+		Tetromino preview = this.clone();
 		for (FallingTile ft: preview.tiles) {
 			Vector centerCoord = centerTile.getCoordinates();
 			Vector ftCoord = ft.getCoordinates();
@@ -262,6 +262,8 @@ public abstract class Tetromino {
 			grid.setTile(fallingTile.getCoordinates().getX(), fallingTile.getCoordinates().getY(), fallingTile);
 		}
 	}
+	
+	protected abstract Tetromino clone();
 	
 	public void display(PApplet w) {
 		for (FallingTile t : tiles) {
