@@ -19,7 +19,7 @@ public class GameScene implements Scene {
 	private int delayBeetwenFalls;
 	
 	public GameScene() {
-		queue = new TetQueue(3);
+		queue = new TetQueue(5);
 		holder = new TetHolder();
 		currentTet = queue.getNext();
 		scoreManager = new ScoreManager(0);
@@ -61,7 +61,7 @@ public class GameScene implements Scene {
 		w.push();
 		
 		w.translate(70,70);
-		//holder.display(w);
+		holder.display(w);
 		
 		w.translate(25 + 4 * Tile.SIZE, 0);
 		grid.display(w);
