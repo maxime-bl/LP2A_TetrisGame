@@ -15,6 +15,7 @@ public class Game extends PApplet{
 	
 	private ScoreManager score = new ScoreManager(250);
 	Grid grid = new Grid();
+	TetHolder hold = new TetHolder();
 	Tile tile1 = new Tile(ColorConstants.GREEN);
 	Tile tile2 = new Tile(ColorConstants.BLUE);
 	Tile tile3 = new Tile(ColorConstants.YELLOW);
@@ -36,12 +37,19 @@ public class Game extends PApplet{
 	public void setup() {
 		frameRate(50);
 		currentScene = new GameScene();
+		
+		hold.swap(new TetL());
 	}
 	
 	//called every 1/60 of second
 	public void draw() {
 		push();
 		background(0);
+		
+		hold.display(this);
+		
+		translate(125, 0);
+		
 		grid.display(this);
 		pop();
 		/*

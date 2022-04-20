@@ -87,4 +87,17 @@ public abstract class Tetromino {
 			w.pop();
 		}
 	}
+	
+	public void displayHolder(PApplet w) {
+		for (FallingTile t : tiles) {
+			int x = t.getCoordinates().getX();
+			int y = t.getCoordinates().getY();
+			
+			w.push();
+			w.translate(-(7*Tile.SIZE+10), 2*Tile.SIZE);
+			w.translate(x*Tile.SIZE,(19-y)*Tile.SIZE);
+			t.display(w);
+			w.pop();
+		}
+	}
 }

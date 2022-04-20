@@ -17,7 +17,7 @@ public class TetI extends Tetromino {
 		translationL = new Vector(0,-1);
 		translationR = new Vector(1,0);
 	}
-
+	
 
 	@Override
 	public void rotateLeft() {

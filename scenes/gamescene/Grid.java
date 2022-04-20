@@ -79,6 +79,8 @@ public class Grid {
 	public void display(PApplet w) {
 		w.push();
 		
+		w.noStroke();
+		
 		int r = ColorConstants.CYAN.getRed();
 		int g = ColorConstants.CYAN.getGreen();
 		int b = ColorConstants.CYAN.getBlue();
@@ -87,8 +89,7 @@ public class Grid {
 		w.rect(0, 0, Tile.SIZE*this.width+10, Tile.SIZE*this.height+10);
 		
 		w.translate(5f, 5f);
-		w.noStroke();
-		
+
 		for (Line line : table) {
 			for (int i = 0; i < this.width; i++) {
 				line.getLine()[i].display(w);;
