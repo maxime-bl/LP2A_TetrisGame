@@ -13,19 +13,14 @@ public class TetO extends Tetromino {
 		super.tiles.add(new FallingTile(ColorConstants.YELLOW, SpawningCoord.x, SpawningCoord.y+1));
 	}
 
-	@Override
-	protected boolean hasCollided() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
-	protected void rotateLeft() {
+	public void rotateLeft() {
 		// The coordinates of the tetromino O aren't modified when it's rotated.
 	}
 
 	@Override
-	protected void rotateRight() {
+	public void rotateRight() {
 		// The coordinates of the tetromino O aren't modified when it's rotated.
 	}
 }

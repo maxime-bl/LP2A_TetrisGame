@@ -18,14 +18,9 @@ public class TetI extends Tetromino {
 		translationR = new Vector(1,0);
 	}
 
-	@Override
-	protected boolean hasCollided() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
-	protected void rotateLeft() {
+	public void rotateLeft() {
 		super.rotateLeft();
 		for (FallingTile ft: tiles) {
 			Vector newCoord = ft.getCoordinates();
@@ -43,7 +38,7 @@ public class TetI extends Tetromino {
 	}
 
 	@Override
-	protected void rotateRight() {
+	public void rotateRight() {
 		super.rotateLeft();
 		for (FallingTile ft: tiles) {
 			Vector newCoord = ft.getCoordinates();

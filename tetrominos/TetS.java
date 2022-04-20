@@ -12,9 +12,4 @@ public class TetS extends Tetromino {
 		super.tiles.add(new FallingTile(ColorConstants.GREEN, SpawningCoord.x, SpawningCoord.y+1));
 	}
 	
-	@Override
-	protected boolean hasCollided() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

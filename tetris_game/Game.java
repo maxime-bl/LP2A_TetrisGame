@@ -3,6 +3,8 @@ package tetris_game;
 
 import processing.core.*;
 import scenes.Scene;
+import scenes.gamescene.GameScene;
+import tetrominos.*;
 import tiles.FallingTile;
 import tiles.Tile;
 import utils.*;
@@ -30,36 +32,21 @@ public class Game extends PApplet{
 	//called once after the PApplet is created
 	public void setup() {
 		frameRate(50);
-		
+		currentScene = new GameScene();
 	}
 	
 	//called every 1/60 of second
 	public void draw() {
-		background(0);
+		
+		
+		/*background(0);
 		
 		push();
-		translate(50,50);
+		//translate(50,50);
+		Tetromino t = new TetI();
+		t.display(this);
 		
-		tile1.display(this);
-		
-		translate(25,0);
-		tile2.display(this);
-		
-		translate(25,0);
-		tile3.display(this);
-		
-		translate(25,0);
-		tile4.display(this);
-		
-		translate(25,0);
-		tile5.display(this);
-		
-		translate(25,0);
-		tile6.display(this);
-		
-		translate(25,0);
-		tile7.display(this);
-		pop();
+		pop();*/
 		
 	}
 	
