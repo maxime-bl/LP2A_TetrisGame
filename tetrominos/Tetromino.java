@@ -74,8 +74,16 @@ public abstract class Tetromino {
 		}
 	}
 	
-	public void update() {
-		
+	public void moveRight() {
+		for (FallingTile fallingTile : tiles) {
+			fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()+1);
+		}
+	}
+	
+	public void moveLeft() {
+		for (FallingTile fallingTile : tiles) {
+			fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()-1);
+		}
 	}
 	
 	public void makeStatic(Grid grid) {
