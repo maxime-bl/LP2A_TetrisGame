@@ -59,19 +59,21 @@ public class GameScene implements Scene {
 
 	@Override
 	public void update() {
+		boolean gameOver = false;
+		
 		if (System.currentTimeMillis() > lastFallingMillis + fallingTime) {
 			if (currentTet.hasCollided(grid)) {
 				currentTet.makeStatic(grid);
 				hasSwapped = false;
+				//Check if the game is lost
+				if (!grid.checkLines()) {
 				currentTet = queue.getNext();
+				}
 			} else {
 				currentTet.fall();
 			}
 			lastFallingMillis = System.currentTimeMillis();
 		} 
-		
-		//check for complete lines
-		grid.checkLines();
 	}
 
 	@Override

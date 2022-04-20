@@ -107,13 +107,15 @@ public abstract class Tetromino {
 	}
 	
 	public void displayHolder(PApplet w) {
-		for (FallingTile t : tiles) {
-			int x = t.getCoordinates().getX();
-			int y = t.getCoordinates().getY();
+		for (FallingTile t : tiles) {			
+			int x = centerTile.getCoordinates().getX();
+			int y = centerTile.getCoordinates().getY();
 			
 			w.push();
-			w.translate(-(3*Tile.SIZE+10), 2*Tile.SIZE);
-			w.translate(x*Tile.SIZE,(19-y)*Tile.SIZE);
+			
+			w.scale(1, -1);
+			
+			w.translate((t.getCoordinates().getX()-x)*Tile.SIZE, (t.getCoordinates().getY()-y)*Tile.SIZE);
 			t.display(w);
 			w.pop();
 		}
