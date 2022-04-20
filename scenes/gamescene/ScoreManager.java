@@ -4,33 +4,33 @@ import processing.core.*;
 
 public class ScoreManager {
 
-	private int score;
-	private boolean isBack2Back = false;
+	private static int score;
+	private static boolean isBack2Back = false;
 	
 	public ScoreManager() {
 		score = 0;
 	}
 	
 	public ScoreManager(int startScore) {
-		this.score = startScore;
+		ScoreManager.score = startScore;
 	}
 	
-	public void update(int nbLines) {
+	public static void update(int nbLines) {
 		if (nbLines < 4) {
-			this.score += nbLines * 100;
-			isBack2Back = false;
+			ScoreManager.score += nbLines * 100;
+			ScoreManager.isBack2Back = false;
 		} else {
-			if (isBack2Back == true) {
-				this.score += 1200;
+			if (ScoreManager.isBack2Back == true) {
+				ScoreManager.score += 1200;
 			} else {
-				this.score += 800;
+				ScoreManager.score += 800;
 			}
-			isBack2Back = true;
+			ScoreManager.isBack2Back = true;
 		}
 	}
 	
 	public String toString() {
-		return "Score : " + this.score;
+		return "Score : " + ScoreManager.score;
 	}
 	
 	public void display(PApplet w) {

@@ -29,10 +29,8 @@ public class Grid {
 		}
 	}
 	
-	
 	final private int height= 20, width = 10;
 	private List<Line> table;
-	
 	
 	public Grid() {
 		table = new ArrayList<Line>();
@@ -47,6 +45,28 @@ public class Grid {
 	
 	public Tile getTile(int posHeight, int posWidth) {
 		return table.get(posHeight).getLine()[posWidth];
+	}
+	
+	public void checkLines(int width) {
+		int nbLines = 0;
+		int index = 0;
+		boolean isFull = true;
+		
+		for (Line l: table) {
+			for (int i = 0; i < width; i++) {
+				if (l.getLine()[i].isNull()) {
+					isFull = false;
+				}
+			}
+			if (isFull) {
+				nbLines++;
+				table.remove(index);
+				table.add(new Line(width));
+			}
+			isFull = true;
+			index++;
+		}
+		ScoreManager.update(nbLines);
 	}
 	
 	public void display() {
