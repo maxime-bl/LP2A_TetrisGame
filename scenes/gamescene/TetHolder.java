@@ -57,7 +57,8 @@ public class TetHolder {
 		
 		if (tetInHold != null) {
 			w.push();
-					
+			
+			w.translate(40, 110);
 			tetInHold.displayHolder(w);
 			
 			w.pop();
