@@ -36,7 +36,7 @@ public class Grid {
 	
 	public Grid() {
 		table = new ArrayList<Line>();
-		for (int i = 0; i < this.height; i++) {
+		for (int i = 0; i < this.height+2; i++) {
 			table.add(new Line(width));
 		}
 		for (Line line : table) {
@@ -95,12 +95,17 @@ public class Grid {
 		w.translate(5f, 5f);
 		
 		w.translate(0, 19*Tile.SIZE);
+		
+		int index = 0;
 		for (Line line : table) {
-			for (int i = 0; i < this.width; i++) {
-				line.getLine()[i].display(w);;
-				w.translate(Tile.SIZE, 0);
+			if (index < 20) {
+				for (int i = 0; i < this.width; i++) {
+					line.getLine()[i].display(w);;
+					w.translate(Tile.SIZE, 0);
+				}
+				w.translate(-width*Tile.SIZE, -Tile.SIZE);
 			}
-			w.translate(-width*Tile.SIZE, -Tile.SIZE);
+			index++;
 		}
 		
 		w.pop();
