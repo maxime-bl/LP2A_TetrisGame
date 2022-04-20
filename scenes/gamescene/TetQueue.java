@@ -43,9 +43,11 @@ public class TetQueue {
 	public void display(PApplet w) {
 		w.push();
 		w.fill(0);
-		w.rect(0, 0, 4*Tile.SIZE, 3*Tile.SIZE*queue.size()+1);
+		w.rect(0, 0, 4*Tile.SIZE + 20, (3*this.size + 1)*Tile.SIZE);
 		
-		w.translate(Tile.SIZE, Tile.SIZE);
+		
+		//display the shapes
+		w.translate(-8 * Tile.SIZE + 10, Tile.SIZE);
 		
 		int i=0;
 		for (Tetromino t : this.queue) {

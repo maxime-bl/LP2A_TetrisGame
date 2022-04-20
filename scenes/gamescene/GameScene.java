@@ -5,16 +5,27 @@ import java.util.*;
 import processing.core.PApplet;
 import scenes.Scene;
 import tetrominos.Tetromino;
+import tiles.Tile;
 
 public class GameScene implements Scene {
 	private Tetromino currentTet;
-	private Queue<Tetromino> queue;
-	private int score;
+	private TetQueue queue;
+	private TetHolder holder;
 	private Grid grid;
-	
+	private ScoreManager scoreManager;
+	private float fallingTime;
+	private float lastFallingTime;
+	private booolean hasSwapped;
 	
 	public GameScene() {
-		
+		queue = new TetQueue(3);
+		holder = new TetHolder();
+		currentTet = queue.getNext();
+		scoreManager = new ScoreManager(0);
+		grid = new Grid();		
+		fallingTime = 1.0f;
+		lastFallingTime = 0f;
+		hasSwapped = false;
 	}
 	
 
@@ -31,8 +42,25 @@ public class GameScene implements Scene {
 	}
 
 	@Override
-	public void render(PApplet window) {
-		// TODO Auto-generated method stub
+	public void render(PApplet w) {
+		w.background(70);
+		
+		w.push();
+		
+		w.translate(70,70);
+		//holder.display(w);
+		
+		w.translate(25 + 4 * Tile.SIZE, 0);
+		grid.display(w);
+		
+		w.translate(10 + 10*Tile.SIZE, fallingTime);
+		queue.display(w);
+		
+		w.translate(-40, 300);
+		scoreManager.display(w);
+		
+		w.pop();
+		
 		
 	}
 	
