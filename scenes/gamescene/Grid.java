@@ -31,7 +31,7 @@ public class Grid {
 		}
 	}
 	
-	final private int height= 20, width = 10;
+	final public int height= 20, width = 10;
 	private List<Line> table;
 	
 	public Grid() {
