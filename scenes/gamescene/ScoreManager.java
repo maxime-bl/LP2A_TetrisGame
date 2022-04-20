@@ -34,9 +34,13 @@ public class ScoreManager {
 	}
 	
 	public void display(PApplet w) {
+		PFont font;
+		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
+		
 		w.push();
-		w.textSize(128);
-		w.text(this.toString(), 40, 120); 
+		w.textFont(font, 30);
+		w.fill(255);
+		w.text(this.toString(), 50, 50); 
 		w.pop();
 	}
 }
