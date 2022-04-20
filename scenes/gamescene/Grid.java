@@ -94,7 +94,7 @@ public class Grid {
 		
 		w.translate(5f, 5f);
 		
-		w.translate(0, 20*Tile.SIZE);
+		w.translate(0, 19*Tile.SIZE);
 		for (Line line : table) {
 			for (int i = 0; i < this.width; i++) {
 				line.getLine()[i].display(w);;
