@@ -13,9 +13,10 @@ public class GameScene implements Scene {
 	private TetHolder holder;
 	private Grid grid;
 	private ScoreManager scoreManager;
-	private float fallingTime;
-	private float lastFallingTime;
-	private booolean hasSwapped;
+	private long fallingTime;
+	private long lastFallingMillis;
+	private boolean hasSwapped;
+	private int delayBeetwenFalls;
 	
 	public GameScene() {
 		queue = new TetQueue(3);
@@ -23,9 +24,10 @@ public class GameScene implements Scene {
 		currentTet = queue.getNext();
 		scoreManager = new ScoreManager(0);
 		grid = new Grid();		
-		fallingTime = 1.0f;
-		lastFallingTime = 0f;
+		fallingTime = 1000;
+		lastFallingMillis = 0;
 		hasSwapped = false;
+		
 	}
 	
 
@@ -37,7 +39,18 @@ public class GameScene implements Scene {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		if (System.currentTimeMillis() > lastFallingMillis + fallingTime) {
+			if (currentTet.hasCollided(grid)) {
+				currentTet.makeStatic();
+				hasSwapped = false;
+				currentTet = queue.getNext();
+			} else {
+				//currentTet.fall();
+			}
+			lastFallingMillis = System.currentTimeMillis();
+		} 
+		
+		//check for complete lines
 		
 	}
 
@@ -53,7 +66,7 @@ public class GameScene implements Scene {
 		w.translate(25 + 4 * Tile.SIZE, 0);
 		grid.display(w);
 		
-		w.translate(10 + 10*Tile.SIZE, fallingTime);
+		w.translate(10 + 10*Tile.SIZE, 0);
 		queue.display(w);
 		
 		w.translate(-40, 300);
