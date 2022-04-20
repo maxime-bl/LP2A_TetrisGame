@@ -66,6 +66,7 @@ public class Grid {
 		
 		for (Line l: table) {
 			if (index < 20) {
+				//cpt (remove les lignes après l'itération)
 				for (int i = 0; i < this.width; i++) {
 					if (l.getLine()[i].isNull()) {
 						isFull = false;

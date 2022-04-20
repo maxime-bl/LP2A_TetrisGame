@@ -53,7 +53,7 @@ public abstract class Tetromino {
 	 * @param direction: int --> 1: clockwise rotation, -1: anti-clockwise rotation
 	 * @param grid: Grid
 	 */
-	public void rotate(int direction, Grid grid) throws CloneNotSupportedException {
+	public void rotate(int direction, Grid grid) {
 		//Check if the rotation is possible without wallkicks
 		boolean isPossible = rotationTest(direction, grid);
 		//Check if a wallkick is possible according to a right rotation
@@ -124,7 +124,7 @@ public abstract class Tetromino {
 	 * @param grid : Grid
 	 * @return int: 1, -1 or 0 if we can't do a wallkick
 	 */
-	protected int wallKickTest(int direction, Grid grid) throws CloneNotSupportedException {
+	protected int wallKickTest(int direction, Grid grid) {
 		Tetromino preview = null;
 		int returnDirection;
 		if (direction == 1) {

@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import scenes.Scene;
 import tetrominos.Tetromino;
 import tiles.Tile;
+import utils.InputManager;
 
 public class GameScene implements Scene {
 	private Tetromino currentTet;
@@ -16,8 +17,8 @@ public class GameScene implements Scene {
 	private long fallingTime;
 	private long lastFallingMillis, lastInputMillis;
 	private boolean hasSwapped;
-	private int minDelayBeetwenFalls;
-	private boolean isSoftDropPressed, wasKeyPressed;
+	private int inputCooldown;
+	private boolean isSoftDropPressed;
 	
 	public GameScene() {
 		queue = new TetQueue(5);
@@ -28,34 +29,36 @@ public class GameScene implements Scene {
 		fallingTime = 300;
 		lastFallingMillis = lastInputMillis = 0;
 		hasSwapped = false;
-		minDelayBeetwenFalls = 100;
+		inputCooldown = 100;
 		isSoftDropPressed = false;
 	}
 	
-
 	@Override
 	public void processInput(PApplet w) {
-		if (w.keyPressed && !wasKeyPressed) {
-			if (w.keyCode == w.DOWN) isSoftDropPressed = true;
-			if (w.keyCode == w.CONTROL || w.key == 'w' || w.key == 'W') currentTet.rotateLeft();
-			if (w.keyCode == w.UP || w.key == 'x' || w.key == 'X') currentTet.rotateRight();
-			if (w.keyCode == w.LEFT) currentTet.moveLeft();
-			if (w.keyCode == w.RIGHT) currentTet.moveRight();
-			if (w.key == ' ') { 
-				//hard drop//
+		//if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {
+			if (InputManager.getKey(w.DOWN)) {
+				currentTet.fall();
 			}
-		} else {
-			if (w.keyCode == w.DOWN) {
-				isSoftDropPressed = false;
+			if (InputManager.getKeyDown(w.UP) || InputManager.getKeyDown('x')) {
+				currentTet.rotate(1, grid);
 			}
-		}
-		
-		if (isSoftDropPressed && System.currentTimeMillis() > lastFallingMillis + minDelayBeetwenFalls) {
-			currentTet.fall();
-		}
-		
-		wasKeyPressed = w.keyPressed;
+			
+			if (InputManager.getKeyDown(w.CONTROL) || InputManager.getKeyDown('w')) {
+				currentTet.rotate(-1, grid);
+			}
+			
+			if (InputManager.getKeyDown(w.LEFT)) {
+				currentTet.moveLeft();
+			}
+			
+			if (InputManager.getKeyDown(w.RIGHT)) {
+				currentTet.moveRight();
+			}
+				
+			lastInputMillis = System.currentTimeMillis();
+		//}
 	}
+
 
 	@Override
 	public void update() {
@@ -102,5 +105,8 @@ public class GameScene implements Scene {
 		
 		
 	}
+
+
+	
 	
 }
