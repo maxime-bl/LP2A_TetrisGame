@@ -16,7 +16,8 @@ public class GameScene implements Scene {
 	private long fallingTime;
 	private long lastFallingMillis;
 	private boolean hasSwapped;
-	private int delayBeetwenFalls;
+	private int minDelayBeetwenFalls;
+	private boolean isSoftDropPressed;
 	
 	public GameScene() {
 		queue = new TetQueue(5);
@@ -24,16 +25,18 @@ public class GameScene implements Scene {
 		currentTet = queue.getNext();
 		scoreManager = new ScoreManager(0);
 		grid = new Grid();		
-		fallingTime = 1000;
+		fallingTime = 300;
 		lastFallingMillis = 0;
 		hasSwapped = false;
-		
+		minDelayBeetwenFalls = 100;
+		isSoftDropPressed = false;
 	}
 	
 
 	@Override
-	public void processInput(PApplet window) {
-		// TODO Auto-generated method stub
+	public void processInput(PApplet w) {
+		//soft fall
+		//if (w.keyPre)
 		
 	}
 
@@ -41,7 +44,7 @@ public class GameScene implements Scene {
 	public void update() {
 		if (System.currentTimeMillis() > lastFallingMillis + fallingTime) {
 			if (currentTet.hasCollided(grid)) {
-				currentTet.makeStatic();
+				currentTet.makeStatic(grid);
 				hasSwapped = false;
 				currentTet = queue.getNext();
 			} else {
