@@ -70,7 +70,6 @@ public abstract class Tetromino {
 	
 	public void fall() {
 		for (FallingTile fallingTile : tiles) {
-			fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()-1);
 			fallingTile.getCoordinates().setY(fallingTile.getCoordinates().getY()-1);
 		}
 	}
