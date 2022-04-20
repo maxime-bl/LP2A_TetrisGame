@@ -78,8 +78,10 @@ public abstract class Tetromino {
 		
 	}
 	
-	public void makeStatic() {
-		
+	public void makeStatic(Grid grid) {
+		for (FallingTile fallingTile : tiles) {
+			grid.setTile(fallingTile.getCoordinates().getX(), fallingTile.getCoordinates().getY(), fallingTile);
+		}
 	}
 	
 	public void display(PApplet w) {

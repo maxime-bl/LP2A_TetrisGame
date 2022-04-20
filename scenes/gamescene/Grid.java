@@ -54,6 +54,10 @@ public class Grid {
 		return table.get(posHeight).getLine()[posWidth];
 	}
 	
+	public void setTile(int posWidth, int posHeight, Tile tile) {
+		table.get(posHeight).getLine()[posWidth] = tile;
+	}
+	
 	public void checkLines() {
 		int nbLines = 0;
 		int index = 0;
