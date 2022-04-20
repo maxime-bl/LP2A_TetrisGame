@@ -1,5 +1,7 @@
 package scenes.gamescene;
 
+import processing.core.*;
+
 public class ScoreManager {
 
 	private int score;
@@ -27,7 +29,14 @@ public class ScoreManager {
 		}
 	}
 	
-	public void display() {
-		
+	public String toString() {
+		return "Score : " + this.score;
+	}
+	
+	public void display(PApplet w) {
+		w.push();
+		w.textSize(128);
+		w.text(this.toString(), 40, 120); 
+		w.pop();
 	}
 }
