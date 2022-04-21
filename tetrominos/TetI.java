@@ -18,37 +18,23 @@ public class TetI extends Tetromino {
 		translationL = new Vector(0,-1);
 		translationR = new Vector(1,0);
 	}
-	
-	/*
-	 * Method used to rotate tetrominoes
-	 * @param direction: int --> 1: clockwise rotation, -1: anti-clockwise rotation
-	 * @param grid: Grid
-	 */
-	@Override
-	public void rotate(int direction, Grid grid) {
-		//Check if the rotation is possible without wallkicks
-		boolean isPossible = rotationTest(direction, grid);
-		
-		//Check if a wallkick is possible according to a right rotation
-		if (direction == 1 && isPossible == false) {
-			if (wallKick(wallKickTest(direction, grid), grid)) {
-				rotateRight();
-			}
-		//Check if a wallkick is possible according to a left rotation
-		} else if (direction == -1 && isPossible == false){
-			if (wallKick(wallKickTest(direction, grid), grid)) {
-				rotateLeft();
-			}
-		//Simply do the rotation
-		} else {
-			if (direction == 1) {
-				rotateRight();
-			} else if (direction == -1) {
-				rotateLeft();
-			}
-		}
+
+	public Vector getTranslationL() {
+		return translationL;
 	}
-	
+
+	public void setTranslationL(Vector translationL) {
+		this.translationL = translationL;
+	}
+
+	public Vector getTranslationR() {
+		return translationR;
+	}
+
+	public void setTranslationR(Vector translationR) {
+		this.translationR = translationR;
+	}
+
 	/*
 	 * A wall kick happens when a player rotates a piece when no space exists in the squares where 
 	 * that tetromino would normally occupy after the rotation.
@@ -57,51 +43,64 @@ public class TetI extends Tetromino {
 	 */
 	@Override
 	protected boolean wallKick(int direction, Grid grid) {
-		if (direction == 2) {
-			this.fall(grid);
-			return true;
-		} else if (direction == 1) {
+		if (direction == 1) {
 			this.moveRight(grid);
 			return true;
 		} else if (direction == -1) {
+			this.moveLeft(grid);
+			return true;
+		} else if (direction == 2) {
+			this.moveRight(grid);
+			this.moveRight(grid);
+			return true;
+		} else if (direction == -2) {
+			this.moveLeft(grid);
 			this.moveLeft(grid);
 			return true;
 		}
 		return false;
 	}
 	
+	
 	/*
 	 * Method used to test if a wallkick is possible
 	 * @param direction: int --> 1: Right, -1: Left
 	 * @param grid : Grid
-	 * @return int: 2: down wall kick, 1: right wall kick, -1: left wallkick or 0 if we can't do a wallkick
+	 * @return int: 1, -1 or 0 if we can't do a wallkick
 	 */
 	@Override
 	protected int wallKickTest(int direction, Grid grid) {
 		Tetromino preview = null;
-		boolean downWK = true;
 		if (direction == 1) {
 			preview = rotateRightPrev();	
 		} else if (direction == -1) {
 			preview = rotateLeftPrev();
 		}
-		for (FallingTile fallingTile : tiles) {
-			if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-						&& fallingTile.getCoordinates().getY() < grid.height+1 && fallingTile.getCoordinates().getY() >= 0) {
-				if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
-					downWK = false;
-				}
-			} else {
-				downWK = false;
-			}
-		} 
-		if (downWK) {
-			return 2;
-		} else if (preview.horizontalMoveCheck(1, grid)) {
+		//Check single wall kick to the right
+		if (preview.horizontalMoveCheck(1, grid)) {
+			System.out.println("1");
 			return 1;
-		} else if (preview.horizontalMoveCheck(-1, grid)) {
+		}
+		//Check single wall kick to the left
+		if (preview.horizontalMoveCheck(-1, grid)) {
+			System.out.println("-1");
 			return -1;
 		}
+		//Check double wall kick to the right
+		preview.moveRight();
+		if (preview.horizontalMoveCheck(1, grid)) {
+			System.out.println("2");
+			return 2;
+		}
+		preview.moveLeft();
+		//Check double wall kick to the left
+		preview.moveLeft();
+		if (preview.horizontalMoveCheck(-1, grid)) {
+			System.out.println("-2");
+			return -2;
+		}
+		preview.moveRight();
+		System.out.println("0");
 		return 0;
 	}
 
@@ -116,16 +115,18 @@ public class TetI extends Tetromino {
 		}
 		
 		// Translation vectors modification
+		int temp = translationL.getX();
 		this.translationL.setX(-translationL.getY());
-		this.translationL.setY(translationL.getX());
+		this.translationL.setY(temp);
 		
+		temp = translationR.getX();
 		this.translationR.setX(-translationR.getY());
-		this.translationR.setY(translationR.getX());
+		this.translationR.setY(temp);
 	}
 
 	@Override
 	public void rotateRight() {
-		super.rotateLeft();
+		super.rotateRight();
 		for (FallingTile ft: tiles) {
 			Vector newCoord = ft.getCoordinates();
 			newCoord.setX(newCoord.getX()+translationR.getX());
@@ -134,11 +135,13 @@ public class TetI extends Tetromino {
 		}
 		
 		// Translation vectors modification
-		this.translationL.setX(-translationL.getY());
-		this.translationL.setY(translationL.getX());
+		int temp = translationL.getX();
+		this.translationL.setX(translationL.getY());
+		this.translationL.setY(-temp);
 		
-		this.translationR.setX(-translationR.getY());
-		this.translationR.setY(translationR.getX());
+		temp = translationR.getX();
+		this.translationR.setX(translationR.getY());
+		this.translationR.setY(-temp);
 	}
 	
 	/*
@@ -146,22 +149,16 @@ public class TetI extends Tetromino {
 	 * @return preview: the simulated tetromino
 	 */
 	@Override
-	protected Tetromino rotateLeftPrev() {
-		Tetromino preview = this.clone();
+	protected TetI rotateLeftPrev() {
+		TetI preview = this.clone();
 		preview.rotateLeft();
-		for (FallingTile ft: tiles) {
+		for (FallingTile ft: preview.tiles) {
 			Vector newCoord = ft.getCoordinates();
-			newCoord.setX(newCoord.getX()+translationR.getX());
-			newCoord.setY(newCoord.getY()+translationR.getY());
+			newCoord.setX(newCoord.getX()+preview.translationL.getX());
+			newCoord.setY(newCoord.getY()+preview.translationL.getY());
 			ft.setCoordinates(newCoord);
 		}
-		
-		// Translation vectors modification
-		this.translationL.setX(-translationL.getY());
-		this.translationL.setY(translationL.getX());
-		
-		this.translationR.setX(-translationR.getY());
-		this.translationR.setY(translationR.getX());
+	
 		return preview;
 	}
 	
@@ -170,35 +167,31 @@ public class TetI extends Tetromino {
 	 * @return preview: the simulated tetromino
 	 */
 	@Override
-	protected Tetromino rotateRightPrev() {
-		Tetromino preview = this.clone();
+	protected TetI rotateRightPrev() {
+		TetI preview = this.clone();
 		preview.rotateRight();
-		for (FallingTile ft: tiles) {
+		for (FallingTile ft: preview.tiles) {
 			Vector newCoord = ft.getCoordinates();
-			newCoord.setX(newCoord.getX()+translationR.getX());
-			newCoord.setY(newCoord.getY()+translationR.getY());
+			newCoord.setX(newCoord.getX()+preview.translationR.getX());
+			newCoord.setY(newCoord.getY()+preview.translationR.getY());
 			ft.setCoordinates(newCoord);
 		}
 		
-		// Translation vectors modification
-		this.translationL.setX(-translationL.getY());
-		this.translationL.setY(translationL.getX());
-		
-		this.translationR.setX(-translationR.getY());
-		this.translationR.setY(translationR.getX());
 		return preview;
 	}
 
 
 	@Override
-	protected Tetromino clone() {
-		Tetromino clone = new TetI();
+	protected TetI clone() {
+		TetI clone = new TetI();
 		Vector newCoord;
 		clone.centerTile = this.centerTile;
 		for (int i = 0; i < 4; i++) {
 			newCoord = new Vector(this.tiles.get(i).getCoordinates().getX(), this.tiles.get(i).getCoordinates().getY());
 			clone.tiles.get(i).setCoordinates(newCoord);
 		}
+		clone.setTranslationL(this.translationL);
+		clone.setTranslationR(this.translationR);
 		return clone;
 	}
 	

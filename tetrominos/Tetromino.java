@@ -24,7 +24,7 @@ public abstract class Tetromino {
 	public Tetromino(Color color, int posHorizontal, int posVertical) {
 		this.tiles = new ArrayList<FallingTile>();
 		this.color = color;
-		this.centerTile = new FallingTile(color, posHorizontal, posVertical);
+		this.centerTile = new FallingTile(ColorConstants.RED, posHorizontal, posVertical);
 	}
 	
 	public Color getColor() {
@@ -137,41 +137,6 @@ public abstract class Tetromino {
 			return -1;
 		}
 		return 0;
-//		//Test the right wallkick
-//		preview.wallKick(1);
-//		returnDirection = 1;
-//		for (FallingTile fallingTile : preview.tiles) {
-//			//Check if the tile will be inside the grid
-//			if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-//					&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
-//				//Check if there is already a tile at these coordinates
-//				if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
-//					returnDirection = 0;
-//				}
-//			} else {
-//				returnDirection = 0;
-//			}
-//		}
-//		
-//		if (returnDirection == 1) {
-//			return returnDirection;
-//		} else {
-//			//Test the left wallkick
-//			preview.wallKick(-1);
-//			returnDirection = -1;
-//			for (FallingTile fallingTile : preview.tiles) {
-//				//Check if the tile will be inside the grid
-//				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-//						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
-//					//Check if there is already a tile at these coordinates
-//					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
-//						returnDirection = 0;
-//					}
-//				} else {
-//					returnDirection = 0;
-//				}
-//			}
-//		}
 	}
 	
 	/*

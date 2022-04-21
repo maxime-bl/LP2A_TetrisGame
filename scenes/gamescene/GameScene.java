@@ -100,7 +100,7 @@ public class GameScene implements Scene {
 		grid.display(w);
 		w.push();
 		w.translate(5,5);
-		currentTet.displayGhost(w, grid);
+		//currentTet.displayGhost(w, grid);
 		currentTet.display(w);
 		w.pop();
 		
