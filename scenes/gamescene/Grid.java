@@ -93,8 +93,9 @@ public class Grid {
 		if (!toSuppr.isEmpty()) {
 			Line newLine = new Line(this.width);
 			newLine.initialize(width);
-			for (Integer idx : toSuppr) {
-				table.remove(idx.intValue());
+			for (int i = toSuppr.size()-1; i > 0; i--) {
+				int idx = toSuppr.get(i); 
+				table.remove(idx);
 				table.add(newLine);
 			}
 		}

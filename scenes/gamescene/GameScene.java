@@ -19,6 +19,7 @@ public class GameScene implements Scene {
 	private long fallingTime, lastFallingMillis, lastInputMillis;
 	private boolean hasSwapped, isSoftDropPressed;
 	private int inputCooldown, level;
+	private TimerClock clock;
 	
 	
 	public GameScene(int level) {
@@ -33,6 +34,7 @@ public class GameScene implements Scene {
 		isSoftDropPressed = false;
 		this.level = level;
 		fallingTime = (long) (1000 * Math.pow((0.8 - (level - 1) * 0.007),level - 1));
+		clock = new TimerClock();
 	}
 	
 	@Override
@@ -95,6 +97,8 @@ public class GameScene implements Scene {
 
 	@Override
 	public void render(PApplet w) {
+		clock.update(w);
+		
 		w.background(70);
 		
 		w.push();
@@ -102,7 +106,7 @@ public class GameScene implements Scene {
 		w.translate((w.width - 510) / 2,70);
 		holder.display(w);
 		w.translate(0,190);
-		displayInfo(w, "TIMER", "00:00");
+		displayInfo(w, "TIMER", clock.toString());
 		w.translate(0,80);
 		scoreManager.display(w);
 		w.translate(0,140);
