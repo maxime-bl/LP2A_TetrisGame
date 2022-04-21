@@ -90,6 +90,8 @@ public class GameScene implements Scene {
 					currentTet = queue.getNext();
 					currentTet.fall(grid);
 					currentTet.fall(grid);
+				} else {
+					clock.setFinish(true);
 				}
 			} else {
 				currentTet.fall(grid);
