@@ -90,7 +90,7 @@ public abstract class Tetromino {
 			for (FallingTile fallingTile : preview.tiles) {
 				//Check if the tile will be inside the grid
 				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
+						&& fallingTile.getCoordinates().getY() < grid.height+1 && fallingTile.getCoordinates().getY() >= 0) {
 					//Check if there is already a tile at these coordinates
 					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false) {
 						isPossible = false;
@@ -105,7 +105,7 @@ public abstract class Tetromino {
 			for (FallingTile fallingTile : preview.tiles) {
 				//Check if the tile will be inside the grid
 				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
+						&& fallingTile.getCoordinates().getY() < grid.height+1 && fallingTile.getCoordinates().getY() >= 0) {
 					//Check if there is already a tile at these coordinates
 					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false) {
 						isPossible = false;
@@ -180,7 +180,7 @@ public abstract class Tetromino {
 	 * @param direction: int --> 1: Right, -1: Left
 	 * @return boolean: true if a wall kick has been done, false else
 	 */
-	private boolean wallKick(int direction, Grid grid) {
+	protected boolean wallKick(int direction, Grid grid) {
 		if (direction == 1) {
 			this.moveRight(grid);
 			return true;
@@ -259,7 +259,7 @@ public abstract class Tetromino {
 			preview.moveRight();
 			for (FallingTile fallingTile : preview.tiles) {
 				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
+						&& fallingTile.getCoordinates().getY() < grid.height+1 && fallingTile.getCoordinates().getY() >= 0) {
 					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
 						isPossible = false;
 					}
@@ -271,7 +271,7 @@ public abstract class Tetromino {
 			preview.moveLeft();
 			for (FallingTile fallingTile : preview.tiles) {
 				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
+						&& fallingTile.getCoordinates().getY() < grid.height+1 && fallingTile.getCoordinates().getY() >= 0) {
 					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
 						isPossible = false;
 					}

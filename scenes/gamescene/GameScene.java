@@ -29,7 +29,7 @@ public class GameScene implements Scene {
 		fallingTime = 300;
 		lastFallingMillis = lastInputMillis = 0;
 		hasSwapped = false;
-		inputCooldown = 50;
+		inputCooldown = 70;
 		isSoftDropPressed = false;
 	}
 	
