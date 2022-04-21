@@ -30,7 +30,7 @@ public class ScoreManager {
 			}
 			ScoreManager.isBack2Back = true;
 		}
-		ScoreManager.nbLines = nbLines;
+		ScoreManager.nbLines += nbLines;
 	}
 	
 	public String toString() {

@@ -79,6 +79,7 @@ public class GameScene implements Scene {
 	@Override
 	public void update() {
 		boolean gameOver = false;
+		lines = scoreManager.getNbLines();
 		
 		if (System.currentTimeMillis() > lastFallingMillis + fallingTime) {
 			if (currentTet.hasCollided(grid)) {
@@ -86,7 +87,6 @@ public class GameScene implements Scene {
 				hasSwapped = false;
 				//Check if the game is lost
 				if (!grid.checkLines()) {
-					lines += scoreManager.getNbLines();
 					currentTet = queue.getNext();
 					currentTet.fall(grid);
 					currentTet.fall(grid);
