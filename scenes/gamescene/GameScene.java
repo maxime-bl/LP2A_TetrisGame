@@ -36,40 +36,35 @@ public class GameScene implements Scene {
 	@Override
 	public void processInput(PApplet w) {
 		
-		
 		if (InputManager.getKeyDown(w.UP) || InputManager.getKeyDown('x')) {
 			currentTet.rotate(1, grid);
 		}
-		
 		if (InputManager.getKeyDown(w.CONTROL) || InputManager.getKeyDown('w')) {
 			currentTet.rotate(-1, grid);
 		}
-		
 		if ((InputManager.getKeyDown(w.SHIFT) || InputManager.getKeyDown('c')) && !hasSwapped) {
 			currentTet = holder.swap(currentTet, queue);
 			hasSwapped = true;
 		}
+		if (InputManager.getKeyDown(' ')) {
+			currentTet.hardDrop(grid);
+			currentTet.makeStatic(grid);
+		}
 		
 		
-			
-			
+		
 		if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {	
 			lastInputMillis = System.currentTimeMillis();
-			
 			if (InputManager.getKey(w.LEFT)) {
 				currentTet.moveLeft(grid);
 			}
-			
 			if (InputManager.getKey(w.RIGHT)) {
 				currentTet.moveRight(grid);
 			}
-			
 			if (InputManager.getKey(w.DOWN)) {
 				currentTet.fall(grid);
 			}
 		}
-		
-	
 	}
 
 
@@ -98,13 +93,14 @@ public class GameScene implements Scene {
 		
 		w.push();
 		
-		w.translate(70,70);
+		w.translate((w.width - 510) / 2,70);
 		holder.display(w);
 		
 		w.translate(25 + 4 * Tile.SIZE, 0);
 		grid.display(w);
 		w.push();
 		w.translate(5,5);
+		currentTet.displayGhost(w, grid);
 		currentTet.display(w);
 		w.pop();
 		
