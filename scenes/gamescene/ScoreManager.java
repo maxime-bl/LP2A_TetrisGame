@@ -7,9 +7,11 @@ public class ScoreManager {
 
 	private static int score;
 	private static boolean isBack2Back = false;
+	private static int nbLines;
 	
 	public ScoreManager() {
 		score = 0;
+		nbLines = 0;
 	}
 	
 	public ScoreManager(int startScore) {
@@ -28,6 +30,7 @@ public class ScoreManager {
 			}
 			ScoreManager.isBack2Back = true;
 		}
+		ScoreManager.nbLines = nbLines;
 	}
 	
 	public String toString() {
@@ -57,7 +60,7 @@ public class ScoreManager {
 		
 		w.push();
 		
-		w.textAlign(w.CENTER);
+		w.textAlign(PConstants.CENTER);
 		w.textFont(font, 16);
 		w.fill(0);
 		w.text("SCORE", 65, 20);
@@ -65,13 +68,17 @@ public class ScoreManager {
 		
 		w.textSize(20);
 		w.fill(255);
-		w.textAlign(w.CENTER);
+		w.textAlign(PConstants.CENTER);
 		w.text(score, 65, 50);
 		
 		w.pop();
 	}
 	
 	public int getScore() {
-		return this.score;
+		return ScoreManager.score;
+	}
+	
+	public int getNbLines() {
+		return ScoreManager.nbLines;
 	}
 }
