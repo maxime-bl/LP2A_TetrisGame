@@ -84,7 +84,6 @@ public class TetI extends Tetromino {
 			preview = this.clone();
 			isPossible = true;
 			ope += test;
-			System.out.println(ope);
 			if (direction < 0) {
 				preview.rotateLeft();
 			} else if (direction > 0) {
@@ -111,7 +110,6 @@ public class TetI extends Tetromino {
 				}
 			}		
 		} while (isPossible == false && test < 5);
-		System.out.println(test);
 		//Apply the result of the test
 		if (isPossible) {
 			if (direction < 0) {
