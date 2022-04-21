@@ -243,12 +243,26 @@ public abstract class Tetromino {
 		return preview;
 	}
 	
-	public void fall(Grid grid) {
+	
+	public boolean fall(Grid grid) {
 		if (this.hasCollided(grid) == false) {
 			for (FallingTile fallingTile : tiles) {
 				fallingTile.getCoordinates().setY(fallingTile.getCoordinates().getY()-1);
 			}
+			return true;
+		} else {
+			return false;
 		}
+	}
+	
+	public boolean fixDefaultHeight(Grid grid) {
+		if (this.fall(grid)) {
+			this.fall(grid);
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 	protected boolean horizontalMoveCheck(int direction, Grid grid) {
@@ -332,8 +346,7 @@ public abstract class Tetromino {
 			}
 		}
 	}
-	
-	public void displayHolder(PApplet w) {
+		public void displayHolder(PApplet w) {
 		for (FallingTile t : tiles) {			
 			int x = centerTile.getCoordinates().getX();
 			int y = centerTile.getCoordinates().getY();

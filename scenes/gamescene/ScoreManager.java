@@ -1,6 +1,7 @@
 package scenes.gamescene;
 
 import processing.core.*;
+import utils.ColorConstants;
 
 public class ScoreManager {
 
@@ -37,10 +38,40 @@ public class ScoreManager {
 		PFont font;
 		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
 		
+		w.noStroke();
 		w.push();
-		w.textFont(font, 30);
-		w.fill(255);
-		w.text(this.toString(), 50, 50); 
+				
+		int r = ColorConstants.CYAN.getRed();
+		int g = ColorConstants.CYAN.getGreen();
+		int b = ColorConstants.CYAN.getBlue();
+		
+		w.fill(r,g,b);
+		w.rect(0, 0, 125, 125, 9, 0, 0, 9);
+		
+		w.fill(0);
+		w.rect(5, 25, 120, 35, 9, 0, 0, 9);
+		w.rect(5, 85, 120, 35, 9, 0, 0, 9);
+
+		
 		w.pop();
+		
+		w.push();
+		
+		w.textAlign(w.CENTER);
+		w.textFont(font, 16);
+		w.fill(0);
+		w.text("SCORE", 65, 20);
+		w.text("TOP SCORE", 65, 80);
+		
+		w.textSize(20);
+		w.fill(255);
+		w.textAlign(w.CENTER);
+		w.text(score, 65, 50);
+		
+		w.pop();
+	}
+	
+	public int getScore() {
+		return this.score;
 	}
 }
