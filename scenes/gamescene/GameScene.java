@@ -29,34 +29,47 @@ public class GameScene implements Scene {
 		fallingTime = 300;
 		lastFallingMillis = lastInputMillis = 0;
 		hasSwapped = false;
-		inputCooldown = 100;
+		inputCooldown = 50;
 		isSoftDropPressed = false;
 	}
 	
 	@Override
 	public void processInput(PApplet w) {
-		//if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {
-			if (InputManager.getKey(w.DOWN)) {
-				currentTet.fall(grid);
-			}
-			if (InputManager.getKeyDown(w.UP) || InputManager.getKeyDown('x')) {
-				currentTet.rotate(1, grid);
-			}
+		
+		
+		if (InputManager.getKeyDown(w.UP) || InputManager.getKeyDown('x')) {
+			currentTet.rotate(1, grid);
+		}
+		
+		if (InputManager.getKeyDown(w.CONTROL) || InputManager.getKeyDown('w')) {
+			currentTet.rotate(-1, grid);
+		}
+		
+		if ((InputManager.getKeyDown(w.SHIFT) || InputManager.getKeyDown('c')) && !hasSwapped) {
+			currentTet = holder.swap(currentTet, queue);
+			hasSwapped = true;
+		}
+		
+		
 			
-			if (InputManager.getKeyDown(w.CONTROL) || InputManager.getKeyDown('w')) {
-				currentTet.rotate(-1, grid);
-			}
 			
-			if (InputManager.getKeyDown(w.LEFT)) {
+		if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {	
+			lastInputMillis = System.currentTimeMillis();
+			
+			if (InputManager.getKey(w.LEFT)) {
 				currentTet.moveLeft();
 			}
 			
-			if (InputManager.getKeyDown(w.RIGHT)) {
+			if (InputManager.getKey(w.RIGHT)) {
 				currentTet.moveRight();
 			}
-				
-			lastInputMillis = System.currentTimeMillis();
-		//}
+			
+			if (InputManager.getKey(w.DOWN)) {
+				currentTet.fall(grid);
+			}
+		}
+		
+	
 	}
 
 

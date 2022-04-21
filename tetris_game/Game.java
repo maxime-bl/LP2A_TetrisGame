@@ -47,7 +47,7 @@ public class Game extends PApplet{
 		frameRate(60);
 		currentScene = new GameScene();
 		
-		hold.swap(new TetL());
+		//hold.swap(new TetL());
 		
 		keysPressed = new HashSet<>();
 		codedKeysPressed = new HashSet<>();
@@ -59,7 +59,6 @@ public class Game extends PApplet{
 		currentScene.update();
 		currentScene.render(this);		
 		
-		System.out.println(InputManager.getKeyDown(UP));
 		InputManager.clear();
 	}
 	
