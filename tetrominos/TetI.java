@@ -5,9 +5,6 @@ import tiles.FallingTile;
 import utils.*;
 
 public class TetI extends Tetromino {
-	
-	private Vector translationL;
-	private Vector translationR;
 
 	public TetI() {
 		super(ColorConstants.SKY_BLUE, SpawningCoord.x, SpawningCoord.y);
@@ -15,186 +12,129 @@ public class TetI extends Tetromino {
 		super.tiles.add(new FallingTile(ColorConstants.SKY_BLUE, SpawningCoord.x-1, SpawningCoord.y));
 		super.tiles.add(new FallingTile(ColorConstants.SKY_BLUE, SpawningCoord.x+1, SpawningCoord.y));
 		super.tiles.add(new FallingTile(ColorConstants.SKY_BLUE, SpawningCoord.x+2, SpawningCoord.y));
-		translationL = new Vector(0,-1);
-		translationR = new Vector(1,0);
-	}
-	
-	/*
-	 * Method used to rotate tetrominoes
-	 * @param direction: int --> 1: clockwise rotation, -1: anti-clockwise rotation
-	 * @param grid: Grid
-	 */
-	@Override
-	public void rotate(int direction, Grid grid) {
-		//Check if the rotation is possible without wallkicks
-		boolean isPossible = rotationTest(direction, grid);
-		
-		//Check if a wallkick is possible according to a right rotation
-		if (direction == 1 && isPossible == false) {
-			if (wallKick(wallKickTest(direction, grid), grid)) {
-				rotateRight();
-			}
-		//Check if a wallkick is possible according to a left rotation
-		} else if (direction == -1 && isPossible == false){
-			if (wallKick(wallKickTest(direction, grid), grid)) {
-				rotateLeft();
-			}
-		//Simply do the rotation
-		} else {
-			if (direction == 1) {
-				rotateRight();
-			} else if (direction == -1) {
-				rotateLeft();
-			}
-		}
-	}
-	
-	/*
-	 * A wall kick happens when a player rotates a piece when no space exists in the squares where 
-	 * that tetromino would normally occupy after the rotation.
-	 * @param direction: int --> 1: Right, -1: Left
-	 * @return boolean: true if a wall kick has been done, false else
-	 */
-	@Override
-	protected boolean wallKick(int direction, Grid grid) {
-		if (direction == 2) {
-			this.fall(grid);
-			return true;
-		} else if (direction == 1) {
-			this.moveRight(grid);
-			return true;
-		} else if (direction == -1) {
-			this.moveLeft(grid);
-			return true;
-		}
-		return false;
-	}
-	
-	/*
-	 * Method used to test if a wallkick is possible
-	 * @param direction: int --> 1: Right, -1: Left
-	 * @param grid : Grid
-	 * @return int: 2: down wall kick, 1: right wall kick, -1: left wallkick or 0 if we can't do a wallkick
-	 */
-	@Override
-	protected int wallKickTest(int direction, Grid grid) {
-		Tetromino preview = null;
-		boolean downWK = true;
-		if (direction == 1) {
-			preview = rotateRightPrev();	
-		} else if (direction == -1) {
-			preview = rotateLeftPrev();
-		}
-		for (FallingTile fallingTile : tiles) {
-			if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-						&& fallingTile.getCoordinates().getY() < grid.height+1 && fallingTile.getCoordinates().getY() >= 0) {
-				if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
-					downWK = false;
-				}
-			} else {
-				downWK = false;
-			}
-		} 
-		if (downWK) {
-			return 2;
-		} else if (preview.horizontalMoveCheck(1, grid)) {
-			return 1;
-		} else if (preview.horizontalMoveCheck(-1, grid)) {
-			return -1;
-		}
-		return 0;
 	}
 
 	@Override
 	public void rotateLeft() {
 		super.rotateLeft();
+		
+		//choosing the final rotation position
+		int wantedRot = this.actualRot - 1;
+		if (wantedRot == -1) {
+			wantedRot = 3;
+		} else if (wantedRot == 4) {
+			wantedRot = 0;
+		}
+		String ope = "" + super.actualRot + ">>" + wantedRot;
+		Vector trans = RotationVectorI.get(ope);
+		
 		for (FallingTile ft: tiles) {
 			Vector newCoord = ft.getCoordinates();
-			newCoord.setX(newCoord.getX()+translationL.getX());
-			newCoord.setY(newCoord.getY()+translationL.getY());
+			newCoord.setX(newCoord.getX()+trans.getX());
+			newCoord.setY(newCoord.getY()+trans.getY());
 			ft.setCoordinates(newCoord);
 		}
-		
-		// Translation vectors modification
-		this.translationL.setX(-translationL.getY());
-		this.translationL.setY(translationL.getX());
-		
-		this.translationR.setX(-translationR.getY());
-		this.translationR.setY(translationR.getX());
 	}
 
 	@Override
 	public void rotateRight() {
-		super.rotateLeft();
+		super.rotateRight();
+		
+		//choosing the final rotation position
+		int wantedRot = this.actualRot + 1;
+		if (wantedRot == -1) {
+			wantedRot = 3;
+		} else if (wantedRot == 4) {
+			wantedRot = 0;
+		}
+		String ope = "" + super.actualRot + ">>" + wantedRot;
+		Vector trans = RotationVectorI.get(ope);
+		
 		for (FallingTile ft: tiles) {
 			Vector newCoord = ft.getCoordinates();
-			newCoord.setX(newCoord.getX()+translationR.getX());
-			newCoord.setY(newCoord.getY()+translationR.getY());
+			newCoord.setX(newCoord.getX()+trans.getX());
+			newCoord.setY(newCoord.getY()+trans.getY());
 			ft.setCoordinates(newCoord);
 		}
-		
-		// Translation vectors modification
-		this.translationL.setX(-translationL.getY());
-		this.translationL.setY(translationL.getX());
-		
-		this.translationR.setX(-translationR.getY());
-		this.translationR.setY(translationR.getX());
 	}
 	
 	/*
-	 * Method used to simulate rotation of the tetromino
-	 * @return preview: the simulated tetromino
+	 * Method used to rotate a tetromino
+	 * @param direction: int --> -1: anti-clockwise, 1: clockwise
+	 * @param grid: the actual game grid
 	 */
 	@Override
-	protected Tetromino rotateLeftPrev() {
-		Tetromino preview = this.clone();
-		preview.rotateLeft();
-		for (FallingTile ft: tiles) {
-			Vector newCoord = ft.getCoordinates();
-			newCoord.setX(newCoord.getX()+translationR.getX());
-			newCoord.setY(newCoord.getY()+translationR.getY());
-			ft.setCoordinates(newCoord);
+	public void rotate(int direction, Grid grid) {
+		//choosing the final rotation position
+		int wantedRot = this.actualRot + direction;
+		if (wantedRot == -1) {
+			wantedRot = 3;
+		} else if (wantedRot == 4) {
+			wantedRot = 0;
 		}
 		
-		// Translation vectors modification
-		this.translationL.setX(-translationL.getY());
-		this.translationL.setY(translationL.getX());
-		
-		this.translationR.setX(-translationR.getY());
-		this.translationR.setY(translationR.getX());
-		return preview;
-	}
-	
-	/*
-	 * Method used to simulate rotation of the tetromino
-	 * @return preview: the simulated tetromino
-	 */
-	@Override
-	protected Tetromino rotateRightPrev() {
-		Tetromino preview = this.clone();
-		preview.rotateRight();
-		for (FallingTile ft: tiles) {
-			Vector newCoord = ft.getCoordinates();
-			newCoord.setX(newCoord.getX()+translationR.getX());
-			newCoord.setY(newCoord.getY()+translationR.getY());
-			ft.setCoordinates(newCoord);
+		boolean isPossible;
+		int test = 0;
+		String ope;
+		Tetromino preview;
+		Vector coord, trans;
+		do {
+			test++;
+			ope = "" + actualRot + ">>" + wantedRot + "_";
+			preview = this.clone();
+			isPossible = true;
+			ope += test;
+			if (direction < 0) {
+				preview.rotateLeft();
+			} else if (direction > 0) {
+				preview.rotateRight();
+			}
+			//Check if the falling tiles are in collision with other 
+			//tiles or are outside the grid
+			for (FallingTile fallingTile : preview.tiles) {
+				coord = fallingTile.getCoordinates();
+				
+				//Get the translation vector corresponding to the test
+				trans = WallKickDataI.get(ope);
+				
+				//Apply the translation to the preview
+				coord.setX(coord.getX()+trans.getX());
+				coord.setY(coord.getY()+trans.getY());
+				
+				//Check the result
+				if (coord.getX() < 0 || coord.getX() >= grid.width
+						|| coord.getY() < 0 || coord.getY() >= grid.height) {
+					isPossible = false;
+				} else if (grid.getTile(coord).isNull() == false) {
+					isPossible = false;
+				}
+			}		
+		} while (isPossible == false && test < 5);
+		//Apply the result of the test
+		if (isPossible) {
+			if (direction < 0) {
+				this.rotateLeft();
+			} else if (direction > 0) {
+				this.rotateRight();
+			}
+			ope = "" + actualRot + ">>" + wantedRot + "_" + test;
+			trans = WallKickDataI.get(ope);
+			for (FallingTile fallingTile : tiles) {
+				coord = fallingTile.getCoordinates();
+				coord.setX(coord.getX()+trans.getX());
+				coord.setY(coord.getY()+trans.getY());
+				fallingTile.setCoordinates(coord);
+			}
+			super.actualRot = wantedRot;
 		}
-		
-		// Translation vectors modification
-		this.translationL.setX(-translationL.getY());
-		this.translationL.setY(translationL.getX());
-		
-		this.translationR.setX(-translationR.getY());
-		this.translationR.setY(translationR.getX());
-		return preview;
 	}
 
-
 	@Override
-	protected Tetromino clone() {
-		Tetromino clone = new TetI();
+	protected TetI clone() {
+		TetI clone = new TetI();
 		Vector newCoord;
 		clone.centerTile = this.centerTile;
+		clone.actualRot = super.actualRot;
 		for (int i = 0; i < 4; i++) {
 			newCoord = new Vector(this.tiles.get(i).getCoordinates().getX(), this.tiles.get(i).getCoordinates().getY());
 			clone.tiles.get(i).setCoordinates(newCoord);

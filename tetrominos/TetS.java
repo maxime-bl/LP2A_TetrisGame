@@ -17,6 +17,7 @@ public class TetS extends Tetromino {
 		Tetromino clone = new TetS();
 		Vector newCoord;
 		clone.centerTile = this.centerTile;
+		clone.actualRot = this.actualRot;
 		for (int i = 0; i < 4; i++) {
 			newCoord = new Vector(this.tiles.get(i).getCoordinates().getX(), this.tiles.get(i).getCoordinates().getY());
 			clone.tiles.get(i).setCoordinates(newCoord);

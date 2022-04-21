@@ -42,7 +42,7 @@ public class Grid {
 	
 	public Grid() {
 		table = new ArrayList<Line>();
-		for (int i = 0; i < this.height+2; i++) {
+		for (int i = 0; i < this.height+3; i++) {
 			table.add(new Line(width));
 		}
 		for (Line line : table) {
