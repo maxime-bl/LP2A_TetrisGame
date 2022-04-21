@@ -347,4 +347,29 @@ public abstract class Tetromino {
 			w.pop();
 		}
 	}
+	
+	public void displayGhost(PApplet w, Grid grid) {
+		Tetromino preview = this.clone();
+		preview.hardDrop(grid);
+		
+		for (FallingTile t : preview.tiles) {
+			int x = t.getCoordinates().getX();
+			int y = t.getCoordinates().getY();
+			
+			if (y<20) {
+				w.push();
+				w.translate(x*Tile.SIZE,(19-y)*Tile.SIZE);
+				t.display(w);
+				w.fill(0,0,0,150);
+				w.rect(0,0,Tile.SIZE,Tile.SIZE);
+				w.pop();
+			}
+		}
+	}
+	
+	public void hardDrop(Grid grid) {
+		while (this.hasCollided(grid) == false) {
+			this.fall(grid);
+		}
+	}
 }
