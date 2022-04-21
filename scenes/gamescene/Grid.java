@@ -22,6 +22,12 @@ public class Grid {
 			line = new Tile[width];
 		}
 		
+		public void initialize(int width) {
+			for (int i = 0; i < width; i++) {
+				line[i] = new NullTile();
+			}
+		}
+		
 		protected Tile[] getLine() {
 			return this.line;
 		}
@@ -40,9 +46,7 @@ public class Grid {
 			table.add(new Line(width));
 		}
 		for (Line line : table) {
-			for (int i = 0; i < this.width; i++) {
-				line.getLine()[i] = new NullTile();
-			}
+			line.initialize(width);
 		}
 	}
 	
@@ -87,9 +91,11 @@ public class Grid {
 			}
 		}
 		if (!toSuppr.isEmpty()) {
+			Line newLine = new Line(this.width);
+			newLine.initialize(width);
 			for (Integer idx : toSuppr) {
 				table.remove(idx.intValue());
-				table.add(new Line(this.width));
+				table.add(newLine);
 			}
 		}
 		
