@@ -239,9 +239,11 @@ public abstract class Tetromino {
 		return preview;
 	}
 	
-	public void fall() {
-		for (FallingTile fallingTile : tiles) {
-			fallingTile.getCoordinates().setY(fallingTile.getCoordinates().getY()-1);
+	public void fall(Grid grid) {
+		if (this.hasCollided(grid) == false) {
+			for (FallingTile fallingTile : tiles) {
+				fallingTile.getCoordinates().setY(fallingTile.getCoordinates().getY()-1);
+			}
 		}
 	}
 	

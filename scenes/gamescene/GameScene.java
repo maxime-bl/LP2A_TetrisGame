@@ -37,7 +37,7 @@ public class GameScene implements Scene {
 	public void processInput(PApplet w) {
 		//if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {
 			if (InputManager.getKey(w.DOWN)) {
-				currentTet.fall();
+				currentTet.fall(grid);
 			}
 			if (InputManager.getKeyDown(w.UP) || InputManager.getKeyDown('x')) {
 				currentTet.rotate(1, grid);
@@ -73,7 +73,7 @@ public class GameScene implements Scene {
 				currentTet = queue.getNext();
 				}
 			} else {
-				currentTet.fall();
+				currentTet.fall(grid);
 			}
 			lastFallingMillis = System.currentTimeMillis();
 		} 
