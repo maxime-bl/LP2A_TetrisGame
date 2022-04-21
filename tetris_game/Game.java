@@ -47,7 +47,7 @@ public class Game extends PApplet{
 	
 	//called every time a key is pressed
 	public void keyPressed() {
-		if (key == this.CODED) {
+		if (key == PConstants.CODED) {
 			InputManager.setKeyPressed(this.keyCode);
 		} else {
 			InputManager.setKeyPressed(this.key);
@@ -56,7 +56,7 @@ public class Game extends PApplet{
 	
 	//called once every time a key is released
 	public void keyReleased() {
-		if (key == this.CODED) {
+		if (key == PConstants.CODED) {
 			InputManager.setKeyReleased(this.keyCode);
 		} else {
 			InputManager.setKeyReleased(this.key);

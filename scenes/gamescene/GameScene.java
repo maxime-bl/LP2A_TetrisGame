@@ -3,6 +3,7 @@ package scenes.gamescene;
 import java.util.*;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PFont;
 import scenes.Scene;
 import tetrominos.Tetromino;
@@ -17,8 +18,8 @@ public class GameScene implements Scene {
 	private Grid grid;
 	private ScoreManager scoreManager;
 	private long fallingTime, lastFallingMillis, lastInputMillis;
-	private boolean hasSwapped, isSoftDropPressed;
-	private int inputCooldown, level;
+	private boolean hasSwapped;
+	private int inputCooldown, level, lines;
 	
 	
 	public GameScene(int level) {
@@ -30,7 +31,7 @@ public class GameScene implements Scene {
 		lastFallingMillis = lastInputMillis = 0;
 		hasSwapped = false;
 		inputCooldown = 70;
-		isSoftDropPressed = false;
+		lines = 0;
 		this.level = level;
 		fallingTime = (long) (1000 * Math.pow((0.8 - (level - 1) * 0.007),level - 1));
 	}
@@ -38,13 +39,13 @@ public class GameScene implements Scene {
 	@Override
 	public void processInput(PApplet w) {
 		
-		if (InputManager.getKeyDown(w.UP) || InputManager.getKeyDown('x')) {
+		if (InputManager.getKeyDown(PConstants.UP) || InputManager.getKeyDown('x')) {
 			currentTet.rotate(1, grid);
 		}
-		if (InputManager.getKeyDown(w.CONTROL) || InputManager.getKeyDown('w')) {
+		if (InputManager.getKeyDown(PConstants.CONTROL) || InputManager.getKeyDown('w')) {
 			currentTet.rotate(-1, grid);
 		}
-		if ((InputManager.getKeyDown(w.SHIFT) || InputManager.getKeyDown('c')) && !hasSwapped) {
+		if ((InputManager.getKeyDown(PConstants.SHIFT) || InputManager.getKeyDown('c')) && !hasSwapped) {
 			currentTet = holder.swap(currentTet, queue);
 			currentTet.fall(grid);
 			currentTet.fall(grid);
@@ -59,13 +60,13 @@ public class GameScene implements Scene {
 		
 		if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {	
 			lastInputMillis = System.currentTimeMillis();
-			if (InputManager.getKey(w.LEFT)) {
+			if (InputManager.getKey(PConstants.LEFT)) {
 				currentTet.moveLeft(grid);
 			}
-			if (InputManager.getKey(w.RIGHT)) {
+			if (InputManager.getKey(PConstants.RIGHT)) {
 				currentTet.moveRight(grid);
 			}
-			if (InputManager.getKey(w.DOWN)) {
+			if (InputManager.getKey(PConstants.DOWN)) {
 				currentTet.fall(grid);
 			}
 		}
@@ -82,6 +83,7 @@ public class GameScene implements Scene {
 				hasSwapped = false;
 				//Check if the game is lost
 				if (!grid.checkLines()) {
+					lines += scoreManager.getNbLines();
 					currentTet = queue.getNext();
 					currentTet.fall(grid);
 					currentTet.fall(grid);
@@ -106,7 +108,7 @@ public class GameScene implements Scene {
 		w.translate(0,80);
 		scoreManager.display(w);
 		w.translate(0,140);
-		displayInfo(w, "LINES", "12");	
+		displayInfo(w, "LINES", "" + lines);	
 		
 		w.translate(25 + 4 * Tile.SIZE, -410);
 		grid.display(w);
@@ -152,7 +154,7 @@ public class GameScene implements Scene {
 		
 		w.textFont(font, 20);
 		w.fill(255);
-		w.textAlign(w.CENTER);
+		w.textAlign(PConstants.CENTER);
 		w.text(value, 65, 50);
 		
 		w.pop();
@@ -180,7 +182,7 @@ public class GameScene implements Scene {
 		//display the text
 		w.textFont(font, 16);
 		w.fill(0);
-		w.textAlign(w.CENTER);
+		w.textAlign(PConstants.CENTER);
 		w.text("LEVEL", 60, 20);
 		w.textFont(font, 20);
 		w.fill(255);
