@@ -61,12 +61,12 @@ public class Grid {
 	public boolean checkLines() {
 		int nbLines = 0;
 		int index = 0;
+		List<Integer> toSuppr = new ArrayList<Integer>();
 		boolean isFull = true;
 		boolean isLost = false;
 		
 		for (Line l: table) {
 			if (index < 20) {
-				//cpt (remove les lignes après l'itération)
 				for (int i = 0; i < this.width; i++) {
 					if (l.getLine()[i].isNull()) {
 						isFull = false;
@@ -74,8 +74,7 @@ public class Grid {
 				}
 				if (isFull) {
 					nbLines++;
-					table.remove(index);
-					table.add(new Line(this.width));
+					toSuppr.add(index);
 				}
 				isFull = true;
 				index++;
@@ -87,6 +86,13 @@ public class Grid {
 				}
 			}
 		}
+		if (!toSuppr.isEmpty()) {
+			for (Integer idx : toSuppr) {
+				table.remove(idx.intValue());
+				table.add(new Line(this.width));
+			}
+		}
+		
 		ScoreManager.update(nbLines);
 		return isLost;
 	}
