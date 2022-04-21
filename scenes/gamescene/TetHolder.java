@@ -1,7 +1,7 @@
 package scenes.gamescene;
 
 import processing.core.*;
-import tetrominos.Tetromino;
+import tetrominos.*;
 import utils.ColorConstants;
 
 public class TetHolder {
@@ -17,10 +17,27 @@ public class TetHolder {
 	 * @current : the current tetromino
 	 * @return : a tetromino if there is one in the holder, null else
 	 */
-	public Tetromino swap(Tetromino current){
+	public Tetromino swap(Tetromino current, TetQueue queue){
+		//reset the current Tetromino
+		if (current.getColor() == ColorConstants.BLUE) {
+			current = new TetJ();
+		} else if (current.getColor() == ColorConstants.GREEN) {
+			current = new TetS();
+		} else if (current.getColor() == ColorConstants.ORANGE) {
+			current = new TetL();
+		} else if (current.getColor() == ColorConstants.PURPLE) {
+			current = new TetT();
+		} else if (current.getColor() == ColorConstants.RED) {
+			current = new TetZ();
+		} else if (current.getColor() == ColorConstants.SKY_BLUE) {
+			current = new TetI();
+		} else {
+			current = new TetO();
+		}
+		
 		if (tetInHold == null) {
 			this.tetInHold = current;
-			return null;
+			return queue.getNext();
 		} else {
 			Tetromino temp = tetInHold;
 			this.tetInHold = current;
