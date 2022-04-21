@@ -18,14 +18,10 @@ public class GameScene implements Scene {
 	private Grid grid;
 	private ScoreManager scoreManager;
 	private long fallingTime, lastFallingMillis, lastInputMillis;
-<<<<<<< HEAD
-	private boolean hasSwapped, isSoftDropPressed;
+	private boolean hasSwapped;
 	private int inputCooldown, level;
 	private TimerClock clock;
-=======
-	private boolean hasSwapped;
-	private int inputCooldown, level, lines;
->>>>>>> bd502551062ac7dcbb6a99e85a10c31af7263194
+	private int lines;
 	
 	
 	public GameScene(int level) {
