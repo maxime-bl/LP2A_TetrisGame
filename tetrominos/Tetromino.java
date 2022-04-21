@@ -356,8 +356,6 @@ public abstract class Tetromino {
 		}
 	}
 	
-	protected abstract Tetromino clone();
-	
 	public void display(PApplet w) {
 		for (FallingTile t : tiles) {
 			int x = t.getCoordinates().getX();
@@ -411,4 +409,6 @@ public abstract class Tetromino {
 			this.fall(grid);
 		}
 	}
+	
+	protected abstract Tetromino clone();
 }
