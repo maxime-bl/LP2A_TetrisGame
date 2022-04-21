@@ -58,12 +58,12 @@ public abstract class Tetromino {
 		boolean isPossible = rotationTest(direction, grid);
 		//Check if a wallkick is possible according to a right rotation
 		if (direction == 1 && isPossible == false) {
-			if (wallKick(wallKickTest(direction, grid))) {
+			if (wallKick(wallKickTest(direction, grid), grid)) {
 				rotateRight();
 			}
 		//Check if a wallkick is possible according to a left rotation
 		} else if (direction == -1 && isPossible == false){
-			if (wallKick(wallKickTest(direction, grid))) {
+			if (wallKick(wallKickTest(direction, grid), grid)) {
 				rotateLeft();
 			}
 		//Simply do the rotation
@@ -126,48 +126,52 @@ public abstract class Tetromino {
 	 */
 	protected int wallKickTest(int direction, Grid grid) {
 		Tetromino preview = null;
-		int returnDirection;
 		if (direction == 1) {
 			preview = rotateRightPrev();	
 		} else if (direction == -1) {
 			preview = rotateLeftPrev();
 		}
-		//Test the right wallkick
-		preview.wallKick(1);
-		returnDirection = 1;
-		for (FallingTile fallingTile : preview.tiles) {
-			//Check if the tile will be inside the grid
-			if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-					&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
-				//Check if there is already a tile at these coordinates
-				if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
-					returnDirection = 0;
-				}
-			} else {
-				returnDirection = 0;
-			}
+		if (preview.horizontalMoveCheck(1, grid)) {
+			return 1;
+		} else if (preview.horizontalMoveCheck(-1, grid)) {
+			return -1;
 		}
-		
-		if (returnDirection == 1) {
-			return returnDirection;
-		} else {
-			//Test the left wallkick
-			preview.wallKick(-1);
-			returnDirection = -1;
-			for (FallingTile fallingTile : preview.tiles) {
-				//Check if the tile will be inside the grid
-				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
-						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
-					//Check if there is already a tile at these coordinates
-					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
-						returnDirection = 0;
-					}
-				} else {
-					returnDirection = 0;
-				}
-			}
-		}
-		return returnDirection;
+		return 0;
+//		//Test the right wallkick
+//		preview.wallKick(1);
+//		returnDirection = 1;
+//		for (FallingTile fallingTile : preview.tiles) {
+//			//Check if the tile will be inside the grid
+//			if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
+//					&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
+//				//Check if there is already a tile at these coordinates
+//				if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
+//					returnDirection = 0;
+//				}
+//			} else {
+//				returnDirection = 0;
+//			}
+//		}
+//		
+//		if (returnDirection == 1) {
+//			return returnDirection;
+//		} else {
+//			//Test the left wallkick
+//			preview.wallKick(-1);
+//			returnDirection = -1;
+//			for (FallingTile fallingTile : preview.tiles) {
+//				//Check if the tile will be inside the grid
+//				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
+//						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
+//					//Check if there is already a tile at these coordinates
+//					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
+//						returnDirection = 0;
+//					}
+//				} else {
+//					returnDirection = 0;
+//				}
+//			}
+//		}
 	}
 	
 	/*
@@ -176,12 +180,12 @@ public abstract class Tetromino {
 	 * @param direction: int --> 1: Right, -1: Left
 	 * @return boolean: true if a wall kick has been done, false else
 	 */
-	private boolean wallKick(int direction) {
+	private boolean wallKick(int direction, Grid grid) {
 		if (direction == 1) {
-			this.moveRight();
+			this.moveRight(grid);
 			return true;
 		} else if (direction == -1) {
-			this.moveLeft();
+			this.moveLeft(grid);
 			return true;
 		}
 		return false;
@@ -247,13 +251,61 @@ public abstract class Tetromino {
 		}
 	}
 	
-	public void moveRight() {
+	protected boolean horizontalMoveCheck(int direction, Grid grid) {
+		Tetromino preview = this.clone();
+		boolean isPossible = true;
+		
+		if (direction == 1) {
+			preview.moveRight();
+			for (FallingTile fallingTile : preview.tiles) {
+				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
+						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
+					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
+						isPossible = false;
+					}
+				} else {
+					isPossible = false;
+				}
+			}
+		} else if (direction == -1) {
+			preview.moveLeft();
+			for (FallingTile fallingTile : preview.tiles) {
+				if (fallingTile.getCoordinates().getX() < grid.width && fallingTile.getCoordinates().getX() >= 0
+						&& fallingTile.getCoordinates().getY() < grid.height && fallingTile.getCoordinates().getY() >= 0) {
+					if (grid.getTile(fallingTile.getCoordinates()).isNull() == false){
+						isPossible = false;
+					}
+				} else {
+					isPossible = false;
+				}
+			}
+		}
+		return isPossible;
+	}
+	
+	public void moveRight(Grid grid) {
+		if (this.horizontalMoveCheck(1, grid)) {
+			for (FallingTile fallingTile : tiles) {
+				fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()+1);
+			}
+		}
+	}
+	
+	public void moveLeft(Grid grid) {
+		if (this.horizontalMoveCheck(-1, grid)) {
+			for (FallingTile fallingTile : tiles) {
+				fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()-1);
+			}
+		}
+	}
+	
+	protected void moveRight() {
 		for (FallingTile fallingTile : tiles) {
 			fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()+1);
 		}
 	}
 	
-	public void moveLeft() {
+	protected void moveLeft() {
 		for (FallingTile fallingTile : tiles) {
 			fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()-1);
 		}

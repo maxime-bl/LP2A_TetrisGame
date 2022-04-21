@@ -57,11 +57,11 @@ public class GameScene implements Scene {
 			lastInputMillis = System.currentTimeMillis();
 			
 			if (InputManager.getKey(w.LEFT)) {
-				currentTet.moveLeft();
+				currentTet.moveLeft(grid);
 			}
 			
 			if (InputManager.getKey(w.RIGHT)) {
-				currentTet.moveRight();
+				currentTet.moveRight(grid);
 			}
 			
 			if (InputManager.getKey(w.DOWN)) {
@@ -83,7 +83,7 @@ public class GameScene implements Scene {
 				hasSwapped = false;
 				//Check if the game is lost
 				if (!grid.checkLines()) {
-				currentTet = queue.getNext();
+					currentTet = queue.getNext();
 				}
 			} else {
 				currentTet.fall(grid);
