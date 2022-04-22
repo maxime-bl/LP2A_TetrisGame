@@ -1,6 +1,7 @@
 package tetrominos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import processing.core.*;
 import scenes.gamescene.Grid;
@@ -9,6 +10,59 @@ import tiles.FallingTile;
 import tiles.Tile;
 
 public abstract class Tetromino {
+	
+	private final static HashMap<String, Vector> wallKickDataJLTSZ;
+	
+	static {
+		wallKickDataJLTSZ = new HashMap<String, Vector>();
+		wallKickDataJLTSZ.put("0>>1_1", new Vector(0, 0));
+		wallKickDataJLTSZ.put("0>>1_2", new Vector(-1, 0));
+		wallKickDataJLTSZ.put("0>>1_3", new Vector(-1, 1));
+		wallKickDataJLTSZ.put("0>>1_4", new Vector(0, -2));
+		wallKickDataJLTSZ.put("0>>1_5", new Vector(-1, -2));
+		
+		wallKickDataJLTSZ.put("1>>0_1", new Vector(0, 0));
+		wallKickDataJLTSZ.put("1>>0_2", new Vector(1, 0));
+		wallKickDataJLTSZ.put("1>>0_3", new Vector(1, -1));
+		wallKickDataJLTSZ.put("1>>0_4", new Vector(0, 2));
+		wallKickDataJLTSZ.put("1>>0_5", new Vector(1, 2));
+		
+		wallKickDataJLTSZ.put("1>>2_1", new Vector(0, 0));
+		wallKickDataJLTSZ.put("1>>2_2", new Vector(1, 0));
+		wallKickDataJLTSZ.put("1>>2_3", new Vector(1, -1));
+		wallKickDataJLTSZ.put("1>>2_4", new Vector(0, 2));
+		wallKickDataJLTSZ.put("1>>2_5", new Vector(1, 2));
+		
+		wallKickDataJLTSZ.put("2>>1_1", new Vector(0, 0));
+		wallKickDataJLTSZ.put("2>>1_2", new Vector(-1, 0));
+		wallKickDataJLTSZ.put("2>>1_3", new Vector(-1, 1));
+		wallKickDataJLTSZ.put("2>>1_4", new Vector(0, -2));
+		wallKickDataJLTSZ.put("2>>1_5", new Vector(-1, -2));
+		
+		wallKickDataJLTSZ.put("2>>3_1", new Vector(0, 0));
+		wallKickDataJLTSZ.put("2>>3_2", new Vector(1, 0));
+		wallKickDataJLTSZ.put("2>>3_3", new Vector(1, 1));
+		wallKickDataJLTSZ.put("2>>3_4", new Vector(0, -2));
+		wallKickDataJLTSZ.put("2>>3_5", new Vector(1, -2));
+		
+		wallKickDataJLTSZ.put("3>>2_1", new Vector(0, 0));
+		wallKickDataJLTSZ.put("3>>2_2", new Vector(-1, 0));
+		wallKickDataJLTSZ.put("3>>2_3", new Vector(-1, -1));
+		wallKickDataJLTSZ.put("3>>2_4", new Vector(0, 2));
+		wallKickDataJLTSZ.put("3>>2_5", new Vector(-1, 2));
+		
+		wallKickDataJLTSZ.put("3>>0_1", new Vector(0, 0));
+		wallKickDataJLTSZ.put("3>>0_2", new Vector(-1, 0));
+		wallKickDataJLTSZ.put("3>>0_3", new Vector(-1, -1));
+		wallKickDataJLTSZ.put("3>>0_4", new Vector(0, 2));
+		wallKickDataJLTSZ.put("3>>0_5", new Vector(-1, 2));
+		
+		wallKickDataJLTSZ.put("0>>3_1", new Vector(0, 0));
+		wallKickDataJLTSZ.put("0>>3_2", new Vector(1, 0));
+		wallKickDataJLTSZ.put("0>>3_3", new Vector(1, 1));
+		wallKickDataJLTSZ.put("0>>3_4", new Vector(0, -2));
+		wallKickDataJLTSZ.put("0>>3_5", new Vector(1, -2));
+	}
 
 	protected ArrayList<FallingTile> tiles;
 	protected Color color;
@@ -84,7 +138,7 @@ public abstract class Tetromino {
 				coord = fallingTile.getCoordinates();
 				
 				//Get the translation vector corresponding to the test
-				trans = WallKickDataJLTSZ.get(ope);
+				trans = wallKickDataJLTSZ.get(ope);
 				
 				//Apply the translation to the preview
 				coord.setX(coord.getX()+trans.getX());
@@ -108,7 +162,7 @@ public abstract class Tetromino {
 				this.rotateRight();
 			}
 			ope = "" + actualRot + ">>" + wantedRot + "_" + test;
-			trans = WallKickDataJLTSZ.get(ope);
+			trans = wallKickDataJLTSZ.get(ope);
 			for (FallingTile fallingTile : tiles) {
 				coord = fallingTile.getCoordinates();
 				coord.setX(coord.getX()+trans.getX());
