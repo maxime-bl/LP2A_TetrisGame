@@ -1,6 +1,7 @@
 package scenes;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PImage;
 import scenes.gamescene.GameScene;
 import scenes.gamescene.ScoreSaver;
@@ -17,6 +18,7 @@ public class MainMenu implements Scene {
 	private Button levelBtn;
 	private Button quitBtn;
 	private ScoreSaver scoreSaver;
+	private PImage img;
 	
 	public MainMenu(PApplet window) {
 		this.w = window;
@@ -24,6 +26,7 @@ public class MainMenu implements Scene {
 		levelBtn = new Button(w.width/2 + 60, 530, 120, 45, "LEVEL : " + level, w, ButtonMode.CENTER, new Color(200,200,200));
 		quitBtn = new Button(w.width/2, 590, 240, 45, "QUIT GAME", w, ButtonMode.CENTER, ColorConstants.RED);
 		scoreSaver = new ScoreSaver();
+		img = w.loadImage("./resources/Tetris_concept.png");
 	}
 	
 	@Override
@@ -53,8 +56,9 @@ public class MainMenu implements Scene {
 	public void render() {
 		w.background(40);
 		
-		PImage img = w.loadImage("./resources/Tetris_concept.png");
-		w.image(img, 385, 50, img.width/2, img.height/2);
+		
+		w.imageMode(PConstants.CENTER);
+		w.image(img, w.width/2, 180, img.width/2.5f, img.height/2.5f);
 		
 		playBtn.display();
 		levelBtn.display();
