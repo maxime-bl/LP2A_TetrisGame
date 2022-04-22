@@ -32,8 +32,7 @@ public class Game extends PApplet{
 	//called once after the PApplet is created
 	public void setup() {
 		frameRate(60);
-		//currentScene = new MainMenu(this);
-		currentScene = new GameOverMenu(this, 1);
+		currentScene = new MainMenu(this);
 	}
 	
 	//called every 1/60 of second

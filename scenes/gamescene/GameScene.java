@@ -148,7 +148,7 @@ public class GameScene implements Scene {
 				} catch (IOException io) {
 					System.out.println("Score can't be saved");
 				}
-				Game.setCurrentScene(new GameOverMenu(w, level));
+				Game.setCurrentScene(new GameOverMenu(w, level,scoreManager.getScore()));
 			}
 		}
 	}
