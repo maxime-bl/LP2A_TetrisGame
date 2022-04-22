@@ -12,15 +12,15 @@ import tiles.*;
 import utils.*;
 
 public class Game extends PApplet{
-	private int windowWidth = 1280, windowHeight = 720;
-	private Scene currentScene;
+	private final int windowWidth = 1280, windowHeight = 720;
+	private static Scene currentScene;
 
 	public static void main(String[] args) {
 		PApplet.main("tetris_game.Game");
 	}
 	
-	public void setCurrentScene(Scene scene) {
-		this.currentScene = scene;
+	public static void setCurrentScene(Scene scene) {
+		currentScene = scene;
 	}
 
 	
@@ -32,14 +32,14 @@ public class Game extends PApplet{
 	//called once after the PApplet is created
 	public void setup() {
 		frameRate(60);
-		currentScene = new GameScene(5);
+		currentScene = new GameScene(this, 1);
 	}
 	
 	//called every 1/60 of second
 	public void draw() {
-		currentScene.processInput(this);
+		currentScene.processInput();
 		currentScene.update();
-		currentScene.render(this);		
+		currentScene.render();		
 		
 		InputManager.clear();
 	}
@@ -61,5 +61,16 @@ public class Game extends PApplet{
 		} else {
 			InputManager.setKeyReleased(this.key);
 		}
+	}
+	
+	//called every time a mouse button is pressed
+	public void mousePressed() {
+		InputManager.setMousePressed();
+	}
+	
+	
+	//called once every time a mouse buttonn is released
+	public void mouseReleased() {
+		InputManager.setMouseReleased();
 	}
 }

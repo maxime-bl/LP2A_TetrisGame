@@ -2,29 +2,38 @@ package scenes.gamescene;
 
 import java.util.*;
 
+import javax.swing.Timer;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 import scenes.Scene;
+import tetris_game.Game;
 import tetrominos.Tetromino;
 import tiles.Tile;
+import utils.Button;
 import utils.ColorConstants;
 import utils.InputManager;
 
 public class GameScene implements Scene {
+	private final int fallingTimes[] = {1000,650,350,130,45};
+	
 	private Tetromino currentTet;
 	private TetQueue queue;
 	private TetHolder holder;
 	private Grid grid;
 	private ScoreManager scoreManager;
 	private long fallingTime, lastFallingMillis, lastInputMillis;
-	private boolean hasSwapped;
+	private boolean hasSwapped, isPaused;
 	private int inputCooldown, level;
 	private TimerClock clock;
-	private int lines;
+	private TimerClock staticTimer;
+	Button pauseBtn, restartBtn;
+	PApplet w;
 	
 	
-	public GameScene(int level) {
+	public GameScene(PApplet window, int level) {
+		this.w = window;
 		queue = new TetQueue(5);
 		holder = new TetHolder();
 		currentTet = queue.getNext();
@@ -33,80 +42,122 @@ public class GameScene implements Scene {
 		lastFallingMillis = lastInputMillis = 0;
 		hasSwapped = false;
 		inputCooldown = 70;
-		lines = 0;
 		this.level = level;
-		fallingTime = (long) (1000 * Math.pow((0.8 - (level - 1) * 0.007),level - 1));
+		fallingTime = fallingTimes[level-1];
 		clock = new TimerClock();
+		staticTimer = new TimerClock();
+		staticTimer.setPaused(true);
+		pauseBtn = new Button((w.width - 510)/2 + 125,600,120,45, "PAUSE", w);
+		restartBtn = new Button((w.width - 510)/2 + 265,600,120,45, "RESTART", w);
+		isPaused = false;
 	}
 	
 	@Override
-	public void processInput(PApplet w) {
-		
-		if (InputManager.getKeyDown(PConstants.UP) || InputManager.getKeyDown('x')) {
-			currentTet.rotate(1, grid);
+	public void processInput() {
+		//checks buttons
+		if (pauseBtn.isReleased()) {
+			isPaused = !isPaused;
+			clock.setPaused(isPaused);
+			staticTimer.setPaused(isPaused);
 		}
-		if (InputManager.getKeyDown(PConstants.CONTROL) || InputManager.getKeyDown('w')) {
-			currentTet.rotate(-1, grid);
+		if (restartBtn.isReleased()) {
+			Game.setCurrentScene(new GameScene(w, level));
 		}
-		if ((InputManager.getKeyDown(PConstants.SHIFT) || InputManager.getKeyDown('c')) && !hasSwapped) {
-			currentTet = holder.swap(currentTet, queue);
-			currentTet.fall(grid);
-			currentTet.fall(grid);
-			hasSwapped = true;
-		}
-		if (InputManager.getKeyDown(' ')) {
-			currentTet.hardDrop(grid);
-			currentTet.makeStatic(grid);
-		}
-		
-		
-		
-		if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {	
-			lastInputMillis = System.currentTimeMillis();
-			if (InputManager.getKey(PConstants.LEFT)) {
-				currentTet.moveLeft(grid);
+				
+		//checks keyboard keys
+		if (!isPaused) {
+			if (InputManager.getKeyDown(PConstants.UP) || InputManager.getKeyDown('x')) {
+				currentTet.rotate(1, grid);
 			}
-			if (InputManager.getKey(PConstants.RIGHT)) {
-				currentTet.moveRight(grid);
+			if (InputManager.getKeyDown(PConstants.CONTROL) || InputManager.getKeyDown('w')) {
+				currentTet.rotate(-1, grid);
 			}
-			if (InputManager.getKey(PConstants.DOWN)) {
+			if ((InputManager.getKeyDown(PConstants.SHIFT) || InputManager.getKeyDown('c')) && !hasSwapped) {
+				currentTet = holder.swap(currentTet, queue);
 				currentTet.fall(grid);
+				currentTet.fall(grid);
+				hasSwapped = true;
+			}
+			if (InputManager.getKeyDown(' ')) {
+				currentTet.hardDrop(grid);
+				staticTimer.setElapsedTime(100000);
+			}
+			
+			if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {	
+				lastInputMillis = System.currentTimeMillis();
+				if (InputManager.getKey(PConstants.LEFT)) {
+					currentTet.moveLeft(grid);
+				}
+				if (InputManager.getKey(PConstants.RIGHT)) {
+					currentTet.moveRight(grid);
+				}
+				if (InputManager.getKey(PConstants.DOWN)) {
+					currentTet.fall(grid);
+				}
 			}
 		}
 	}
 
 
 	@Override
-	public void update() {
-		boolean gameOver = false;
-		lines = scoreManager.getNbLines();
+	public void update() {		
+		if (!isPaused) {	
+			boolean gameover = false;
+			staticTimer.update();
+			
+			if (System.currentTimeMillis() > lastFallingMillis + fallingTime) {
+				lastFallingMillis = System.currentTimeMillis();
+				if (!currentTet.fall(grid)) {
+					//if the tetromino couldn't fall
+					if (!staticTimer.isRunning()) {
+						staticTimer.setPaused(false);
+					}
+				} else {
+					//if the tetromino fell
+					staticTimer.setPaused(true);
+					staticTimer.reset();
+				}
+			}
+			
 		
-		if (System.currentTimeMillis() > lastFallingMillis + fallingTime) {
-			if (currentTet.hasCollided(grid)) {
+			if (staticTimer.getElapsedTime() > 1.5 * fallingTime && currentTet.hasCollided(grid)) {
+				//makes static and spawns a new tetromino
 				currentTet.makeStatic(grid);
 				hasSwapped = false;
+				staticTimer.setPaused(true);
+				staticTimer.reset();
+				
 				//Check if the game is lost
-				if (!grid.checkLines()) {
+				if (!grid.checkLines(scoreManager)) {
 					currentTet = queue.getNext();
-					currentTet.fall(grid);
-					currentTet.fall(grid);
+					if (currentTet.fall(grid)) {
+						currentTet.fall(grid);
+					}
+					else { //if the new tetromino couldn't fit in the grid
+						gameover = true;
+					}
 				} else {
-					clock.setFinish(true);
+					gameover = true;
 				}
-			} else {
-				currentTet.fall(grid);
 			}
-			lastFallingMillis = System.currentTimeMillis();
-		} 
+			
+			
+			if (gameover) {
+				clock.setFinish(true);
+				//skip to next scene
+			}
+		}
 	}
 
 	@Override
-	public void render(PApplet w) {
-		clock.update(w);
-		
-		w.background(70);
+	public void render() {
+		clock.update();
+			
+		w.background(40);
 		
 		w.push();
+		pauseBtn.display();
+		restartBtn.display();
 		
 		w.translate((w.width - 510) / 2,70);
 		holder.display(w);
@@ -115,7 +166,7 @@ public class GameScene implements Scene {
 		w.translate(0,80);
 		scoreManager.display(w);
 		w.translate(0,140);
-		displayInfo(w, "LINES", "" + lines);	
+		displayInfo(w, "LINES", "" + scoreManager.getNbLines());	
 		
 		w.translate(25 + 4 * Tile.SIZE, -410);
 		grid.display(w);

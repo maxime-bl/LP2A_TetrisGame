@@ -62,7 +62,7 @@ public class Grid {
 		table.get(posHeight).getLine()[posWidth] = tile;
 	}
 	
-	public boolean checkLines() {
+	public boolean checkLines(ScoreManager scoreManager) {
 		int nbLines = 0;
 		int index = 0;
 		List<Integer> toSuppr = new ArrayList<Integer>();
@@ -100,7 +100,7 @@ public class Grid {
 			}
 		}
 		
-		ScoreManager.update(nbLines);
+		scoreManager.update(nbLines);
 		return isLost;
 	}
 	

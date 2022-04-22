@@ -5,36 +5,36 @@ import utils.ColorConstants;
 
 public class ScoreManager {
 
-	private static int score;
-	private static boolean isBack2Back = false;
-	private static int nbLines;
+	private int score;
+	private boolean isBack2Back = false;
+	private int nbLines;
 	
 	public ScoreManager() {
-		score = 0;
-		nbLines = 0;
+		this.score = 0;
+		this.nbLines = 0;
 	}
 	
 	public ScoreManager(int startScore) {
-		ScoreManager.score = startScore;
+		this.score = startScore;
 	}
 	
-	public static void update(int nbLines) {
+	public void update(int nbLines) {
 		if (nbLines < 4) {
-			ScoreManager.score += nbLines * 100;
-			ScoreManager.isBack2Back = false;
+			this.score += nbLines * 100;
+			this.isBack2Back = false;
 		} else {
-			if (ScoreManager.isBack2Back == true) {
-				ScoreManager.score += 1200;
+			if (this.isBack2Back == true) {
+				this.score += 1200;
 			} else {
-				ScoreManager.score += 800;
+				this.score += 800;
 			}
-			ScoreManager.isBack2Back = true;
+			isBack2Back = true;
 		}
-		ScoreManager.nbLines += nbLines;
+		this.nbLines += nbLines;
 	}
 	
 	public String toString() {
-		return "Score : " + ScoreManager.score;
+		return "Score : " + this.score;
 	}
 	
 	public void display(PApplet w) {
@@ -69,16 +69,16 @@ public class ScoreManager {
 		w.textSize(20);
 		w.fill(255);
 		w.textAlign(PConstants.CENTER);
-		w.text(score, 65, 50);
+		w.text(this. score, 65, 50);
 		
 		w.pop();
 	}
 	
 	public int getScore() {
-		return ScoreManager.score;
+		return this.score;
 	}
 	
 	public int getNbLines() {
-		return ScoreManager.nbLines;
+		return this.nbLines;
 	}
 }

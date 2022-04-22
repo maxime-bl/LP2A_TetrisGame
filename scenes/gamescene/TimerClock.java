@@ -4,51 +4,73 @@ import processing.core.*;
 import java.lang.Math;
 
 public class TimerClock {
-
-	private long millisec;
-	private long seconds;
-	private long minutes;
+	private long lastMillis;
+	private long elapsedMillis;
+	private boolean isPaused = false;
 	private boolean isFinished = false;
 	
 	public TimerClock() {
-		millisec = 0;
-		seconds = 0;
-		minutes = 0;
+		lastMillis = System.currentTimeMillis();
+		elapsedMillis = 0;
+		
 	}
 	
-	public void update(PApplet w) {
-		if (!isFinished) {
-			millisec = w.millis();
-			seconds = (millisec/1000)%60;
-			minutes = (long)Math.floor((millisec/1000)/60);
+	public void update() {
+		if (!isFinished && !isPaused) {
+			elapsedMillis += System.currentTimeMillis() - lastMillis;
+			lastMillis = System.currentTimeMillis();
 		}
 	}
 	
+	public void setPaused(boolean isPaused) {
+		this.isPaused = isPaused;
+		if(isPaused == false) {
+			lastMillis = System.currentTimeMillis();
+		}
+	}
+
 	public long getMinutes() {
-		return minutes;
+		return (long)Math.floor((elapsedMillis/1000)/60);
 	}
 	
 	public long getSeconds() {
-		return seconds;
+		return (elapsedMillis/1000)%60;
 	}
 	
 	public void setFinish(boolean b) {
 		this.isFinished = b;
 	}
 	
+	public void reset() {
+		elapsedMillis = 0;
+		lastMillis = System.currentTimeMillis();
+	}
+	
 	public String toString() {
 		String timer = "";
-		if (minutes < 10) {
-			timer += "0" + minutes;
+		if (getMinutes() < 10) {
+			timer += "0" + getMinutes();
 		} else {
-			timer += minutes;
+			timer += getMinutes();
 		}
 		timer += ":";
-		if (seconds < 10) {
-			timer += "0" + seconds;
+		if (getSeconds() < 10) {
+			timer += "0" + getSeconds();
 		} else {
-			timer += seconds;
+			timer += getSeconds();
 		}
 		return timer;
+	}
+	
+	public boolean isRunning() {
+		return !isPaused && !isFinished;
+	}
+
+	public long getElapsedTime() {
+		return elapsedMillis;
+	}
+	
+	public void setElapsedTime(long elapsedMillis) {
+		this.elapsedMillis = elapsedMillis;
 	}
 }
