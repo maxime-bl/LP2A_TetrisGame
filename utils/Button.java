@@ -10,6 +10,7 @@ public class Button {
 	private String text;
 	private PApplet w;
 	private int mode;
+	private Color color;
 
 	
 	public Button(float x, float y, int width, int height, String text, PApplet window) {
@@ -21,6 +22,7 @@ public class Button {
 		this.text = text;
 		this.w = window;
 		this.mode = PConstants.CORNER;
+		this.color = ColorConstants.CYAN;
 	}
 	
 	public Button(float x, float y, int width, int height, String text, PApplet window, ButtonMode mode) {
@@ -32,6 +34,19 @@ public class Button {
 		this.text = text;
 		this.w = window;
 		this.setMode(mode);
+		this.color = ColorConstants.CYAN;
+	}
+	
+	public Button(float x, float y, int width, int height, String text, PApplet window, ButtonMode mode, Color color) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.text = text;
+		this.w = window;
+		this.setMode(mode);
+		this.color = color;
 	}
 	
 	public void display() {
@@ -43,19 +58,26 @@ public class Button {
 		w.noStroke();
 		w.rectMode(mode);
 		w.textAlign(PConstants.CENTER, PConstants.TOP);
-		
-		w.fill(ColorConstants.CYAN.getRed(), ColorConstants.CYAN.getGreen(), ColorConstants.CYAN.getBlue());
+	
+		w.fill(color.getRed(), color.getGreen(), color.getBlue());
 		w.rect(x,y,width,height,9);
+		if (this.isPressed()) {
+			w.fill(255,255,255,50);
+		} else if (this.isHovered()) {
+			w.fill(255,255,255,30);
+		} else {
+			w.fill(255,255,255,0);
+		}		
+		w.rect(x,y,width,height,9);
+	
 		
 		if (this.isPressed()) {
-			w.fill(65);
+			w.fill(50);
 		} else if (this.isHovered()) {
-			w.fill(45);
+			w.fill(30);
 		} else {
 			w.fill(0);
-		}
-		
-		
+		}		
 		w.textSize(20);
 		
 	    if (mode == PConstants.CENTER) {
