@@ -21,10 +21,10 @@ public class ScoreManager {
 	}
 	
 	public void update(int nbLines) {
-		if (nbLines < 4) {
+		if (nbLines < 4 && nbLines > 0) {
 			this.score += nbLines * 100;
 			this.isBack2Back = false;
-		} else {
+		} else if (nbLines >= 4) {
 			if (this.isBack2Back == true) {
 				this.score += 1200;
 			} else {

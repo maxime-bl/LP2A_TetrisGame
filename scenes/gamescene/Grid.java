@@ -43,7 +43,7 @@ public class Grid {
 	public Grid() {
 		table = new ArrayList<Line>();
 		for (int i = 0; i < this.height+3; i++) {
-			table.add(new Line(width));
+			table.add(i, new Line(width));
 		}
 		for (Line line : table) {
 			line.initialize(width);
@@ -91,12 +91,12 @@ public class Grid {
 			}
 		}
 		if (!toSuppr.isEmpty()) {
-			Line newLine = new Line(this.width);
-			newLine.initialize(width);
 			for (int i = toSuppr.size()-1; i >= 0; i--) {
+				Line newLine = new Line(this.width);
+				newLine.initialize(width);
 				int idx = toSuppr.get(i); 
 				table.remove(idx);
-				table.add(newLine);
+				table.add(22-i,newLine);
 			}
 		}
 		
