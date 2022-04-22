@@ -1,6 +1,7 @@
 package scenes;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import scenes.gamescene.GameScene;
 import tetris_game.Game;
 import utils.Button;
@@ -48,8 +49,11 @@ public class MainMenu implements Scene {
 
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
 		w.background(40);
+		
+		PImage img = w.loadImage("./resources/Tetris_concept.png");
+		w.image(img, 470, 50, img.width/3, img.height/3);
+		
 		playBtn.display();
 		levelBtn.display();
 		quitBtn.display();
