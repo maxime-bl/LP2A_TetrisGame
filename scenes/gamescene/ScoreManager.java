@@ -4,7 +4,9 @@ import processing.core.*;
 import utils.ColorConstants;
 
 public class ScoreManager {
-
+	
+	public ScoreSaver saver = new ScoreSaver();
+	
 	private int score;
 	private boolean isBack2Back = false;
 	private int nbLines;
@@ -65,6 +67,8 @@ public class ScoreManager {
 		w.fill(0);
 		w.text("SCORE", 65, 20);
 		w.text("TOP SCORE", 65, 80);
+		w.fill(255);
+		w.text(""+saver.getBestScore(), 65, 115);
 		
 		w.textSize(20);
 		w.fill(255);
