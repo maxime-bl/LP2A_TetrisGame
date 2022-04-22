@@ -41,7 +41,7 @@ public class GameScene implements Scene {
 		inputCooldown = 70;
 		this.level = level;
 		fallingTime = fallingTimes[level-1];
-		clock = new TimerClock();
+		clock = new TimerClock(w);
 		pauseBtn = new Button((w.width - 510)/2 + 125,600,120,45, "PAUSE", w);
 		restartBtn = new Button((w.width - 510)/2 + 265,600,120,45, "RESTART", w);
 		isPaused = false;
@@ -51,6 +51,7 @@ public class GameScene implements Scene {
 	public void processInput() {
 		if (pauseBtn.isReleased()) {
 			isPaused = !isPaused;
+			clock.setPaused(isPaused);
 		}
 		
 		if (restartBtn.isReleased()) {
