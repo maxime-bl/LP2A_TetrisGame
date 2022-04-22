@@ -4,6 +4,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import processing.core.PApplet;
+import processing.core.PConstants;
+import processing.core.PFont;
+import utils.ColorConstants;
+
 public class ScoreSaver {
 	
 	public static class ScoreComparator implements Comparator<Integer> {
@@ -34,7 +39,11 @@ public class ScoreSaver {
 		sortScores();
 		ArrayList<Integer> bestScores = new ArrayList<Integer>();
 		for (int i = 0; i < 5; i++) {
-			bestScores.add(scores.get(i));
+			if (scores.size() > i) {
+				bestScores.add(scores.get(i));
+			} else {
+				bestScores.add(0);
+			}
 		}
 		return bestScores;
 	}
@@ -46,7 +55,11 @@ public class ScoreSaver {
 			System.out.println("The file can't be read");
 		}
 		sortScores();
-		return scores.get(0);
+		if (scores.isEmpty() == false) {
+			return scores.get(0);
+		} else {
+			return 0;
+		}
 	}
 	
 	private void readFile(String filePath) throws IOException {
@@ -61,6 +74,7 @@ public class ScoreSaver {
 		}
 		StreamTokenizer entree = new StreamTokenizer(fr);
 		
+		scores.clear();
 		while (entree.nextToken() == StreamTokenizer.TT_NUMBER) {
 			readedScore = (int)entree.nval;
 			scores.add(readedScore);
@@ -77,5 +91,36 @@ public class ScoreSaver {
 		}
 		fw.append(""+score+"\n");
 		fw.close();
+	}
+	
+	public void displayBestScores(PApplet w) {
+		PFont font;
+		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
+		ArrayList<Integer> bestScores = this.getBestScores();
+		
+		w.push();
+		
+		w.noStroke();
+		w.fill(ColorConstants.CYAN.getRed(), ColorConstants.CYAN.getGreen(), ColorConstants.CYAN.getBlue());
+		w.rect(0,0,240,180,9);
+		
+		w.textFont(font, 16);
+		w.fill(0);
+		w.textAlign(PConstants.CENTER);
+		w.text("TOP SCORES", 120, 20);
+		
+		w.fill(0);
+		w.rect(5,25,230,30*5,9);
+		w.fill(40);
+		w.rect(5,55,230,30);
+		w.rect(5,55+60,230,30);
+		
+		w.textFont(font, 20);
+		w.fill(255);
+		for (int i=0; i<5; i++) {
+			w.text(bestScores.get(i),120,48 + i*30);
+		}
+		
+		w.pop();
 	}
 }
