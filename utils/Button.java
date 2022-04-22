@@ -131,4 +131,8 @@ public class Button {
 	  public enum ButtonMode{
 		  CENTER, CORNER;
 	  }
+	  
+	  public void setText(String text) {
+		  this.text = text;
+	  }
 }

@@ -5,8 +5,8 @@ import scenes.gamescene.ScoreManager;
 import java.util.*;
 
 import processing.core.*;
-import scenes.Scene;
-import scenes.gamescene.*;
+import scenes.MainMenu;
+import scenes.*;
 import tetrominos.*;
 import tiles.*;
 import utils.*;
@@ -32,7 +32,7 @@ public class Game extends PApplet{
 	//called once after the PApplet is created
 	public void setup() {
 		frameRate(60);
-		currentScene = new GameScene(this, 1);
+		currentScene = new MainMenu(this);
 	}
 	
 	//called every 1/60 of second
