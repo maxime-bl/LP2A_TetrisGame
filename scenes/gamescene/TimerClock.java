@@ -8,25 +8,24 @@ public class TimerClock {
 	private long elapsedMillis;
 	private boolean isPaused = false;
 	private boolean isFinished = false;
-	private PApplet w;	
 	
-	public TimerClock(PApplet window) {
-		this.w = window;
-		lastMillis = w.millis();
+	public TimerClock() {
+		lastMillis = System.currentTimeMillis();
 		elapsedMillis = 0;
+		
 	}
 	
-	public void update(PApplet w) {
+	public void update() {
 		if (!isFinished && !isPaused) {
-			elapsedMillis += w.millis() - lastMillis;
-			lastMillis = w.millis();
+			elapsedMillis += System.currentTimeMillis() - lastMillis;
+			lastMillis = System.currentTimeMillis();
 		}
 	}
 	
 	public void setPaused(boolean isPaused) {
 		this.isPaused = isPaused;
 		if(isPaused == false) {
-			lastMillis = w.millis();
+			lastMillis = System.currentTimeMillis();
 		}
 	}
 
@@ -40,6 +39,11 @@ public class TimerClock {
 	
 	public void setFinish(boolean b) {
 		this.isFinished = b;
+	}
+	
+	public void reset() {
+		elapsedMillis = 0;
+		lastMillis = System.currentTimeMillis();
 	}
 	
 	public String toString() {
@@ -56,5 +60,17 @@ public class TimerClock {
 			timer += getSeconds();
 		}
 		return timer;
+	}
+	
+	public boolean isRunning() {
+		return !isPaused && !isFinished;
+	}
+
+	public long getElapsedTime() {
+		return elapsedMillis;
+	}
+	
+	public void setElapsedTime(long elapsedMillis) {
+		this.elapsedMillis = elapsedMillis;
 	}
 }

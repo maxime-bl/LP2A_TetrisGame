@@ -2,6 +2,8 @@ package scenes.gamescene;
 
 import java.util.*;
 
+import javax.swing.Timer;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
@@ -25,6 +27,7 @@ public class GameScene implements Scene {
 	private boolean hasSwapped, isPaused;
 	private int inputCooldown, level;
 	private TimerClock clock;
+	private TimerClock staticTimer;
 	Button pauseBtn, restartBtn;
 	PApplet w;
 	
@@ -41,7 +44,9 @@ public class GameScene implements Scene {
 		inputCooldown = 70;
 		this.level = level;
 		fallingTime = fallingTimes[level-1];
-		clock = new TimerClock(w);
+		clock = new TimerClock();
+		staticTimer = new TimerClock();
+		staticTimer.setPaused(true);
 		pauseBtn = new Button((w.width - 510)/2 + 125,600,120,45, "PAUSE", w);
 		restartBtn = new Button((w.width - 510)/2 + 265,600,120,45, "RESTART", w);
 		isPaused = false;
@@ -49,15 +54,17 @@ public class GameScene implements Scene {
 	
 	@Override
 	public void processInput() {
+		//checks buttons
 		if (pauseBtn.isReleased()) {
 			isPaused = !isPaused;
 			clock.setPaused(isPaused);
+			staticTimer.setPaused(isPaused);
 		}
-		
 		if (restartBtn.isReleased()) {
 			Game.setCurrentScene(new GameScene(w, level));
 		}
 				
+		//checks keyboard keys
 		if (!isPaused) {
 			if (InputManager.getKeyDown(PConstants.UP) || InputManager.getKeyDown('x')) {
 				currentTet.rotate(1, grid);
@@ -73,10 +80,8 @@ public class GameScene implements Scene {
 			}
 			if (InputManager.getKeyDown(' ')) {
 				currentTet.hardDrop(grid);
-				currentTet.makeStatic(grid);
+				staticTimer.setElapsedTime(100000);
 			}
-			
-			
 			
 			if (System.currentTimeMillis() > lastInputMillis+inputCooldown) {	
 				lastInputMillis = System.currentTimeMillis();
@@ -95,35 +100,60 @@ public class GameScene implements Scene {
 
 
 	@Override
-	public void update() {
-		if (!isPaused) {
-			boolean gameOver = false;
+	public void update() {		
+		if (!isPaused) {	
+			boolean gameover = false;
+			staticTimer.update();
 			
 			if (System.currentTimeMillis() > lastFallingMillis + fallingTime) {
-				if (currentTet.hasCollided(grid)) {
-					currentTet.makeStatic(grid);
-					hasSwapped = false;
-					//Check if the game is lost
-					if (!grid.checkLines(scoreManager)) {
-						currentTet = queue.getNext();
-						currentTet.fall(grid);
-						currentTet.fall(grid);
-					} else {
-						clock.setFinish(true);
+				lastFallingMillis = System.currentTimeMillis();
+				if (!currentTet.fall(grid)) {
+					//if the tetromino couldn't fall
+					if (!staticTimer.isRunning()) {
+						staticTimer.setPaused(false);
 					}
 				} else {
-					currentTet.fall(grid);
+					//if the tetromino fell
+					staticTimer.setPaused(true);
+					staticTimer.reset();
 				}
-				lastFallingMillis = System.currentTimeMillis();
-			} 
+			}
+			
+		
+			if (staticTimer.getElapsedTime() > 1.5 * fallingTime && currentTet.hasCollided(grid)) {
+				//makes static and spawns a new tetromino
+				currentTet.makeStatic(grid);
+				hasSwapped = false;
+				staticTimer.setPaused(true);
+				staticTimer.reset();
+				
+				//Check if the game is lost
+				if (!grid.checkLines(scoreManager)) {
+					currentTet = queue.getNext();
+					if (currentTet.fall(grid)) {
+						currentTet.fall(grid);
+					}
+					else { //if the new tetromino couldn't fit in the grid
+						gameover = true;
+					}
+				} else {
+					gameover = true;
+				}
+			}
+			
+			
+			if (gameover) {
+				clock.setFinish(true);
+				//skip to next scene
+			}
 		}
 	}
 
 	@Override
 	public void render() {
-		clock.update(w);
+		clock.update();
 			
-		w.background(70);
+		w.background(40);
 		
 		w.push();
 		pauseBtn.display();
