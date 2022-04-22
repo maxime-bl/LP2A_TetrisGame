@@ -3,8 +3,6 @@ package scenes.gamescene;
 import java.io.IOException;
 import java.util.*;
 
-import javax.swing.Timer;
-
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;

@@ -68,7 +68,7 @@ public class ScoreManager {
 		w.text("SCORE", 65, 20);
 		w.text("TOP SCORE", 65, 80);
 		w.fill(255);
-		w.text(""+saver.getBestScore(), 65, 115);
+		w.text(""+saver.getBestScore(), 65, 110);
 		
 		w.textSize(20);
 		w.fill(255);

@@ -246,9 +246,9 @@ public abstract class Tetromino {
 			
 			w.push();
 			
-			w.scale(1, -1);
+			//w.scale(1, -1);
 			
-			w.translate((t.getCoordinates().getX()-x)*Tile.SIZE, (t.getCoordinates().getY()-y)*Tile.SIZE);
+			w.translate((t.getCoordinates().getX()-x)*Tile.SIZE, -(t.getCoordinates().getY()-y)*Tile.SIZE);
 			t.display(w);
 			w.pop();
 		}
