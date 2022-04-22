@@ -1,14 +1,8 @@
 package scenes.gamescene;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
 
 public class ScoreSaver {
 	
@@ -29,11 +23,12 @@ public class ScoreSaver {
 		nbScores = 0;
 	}
 	
-	public void sortScores() {
+	private void sortScores() {
 		scores.sort(new ScoreComparator());
 	}
 	
 	public ArrayList<Integer> getBestScores() {
+		this.sortScores();
 		ArrayList<Integer> bestScores = new ArrayList<Integer>();
 		for (int i = 0; i < 5; i++) {
 			bestScores.add(scores.get(i));
@@ -49,11 +44,21 @@ public class ScoreSaver {
 		try {
 			buffReader = new BufferedReader(new FileReader(new File("./resources/ScoreSave.txt")));
 		} catch (FileNotFoundException exc) {
-			System.out.println("Opening error");
+			System.out.println("Opening error, file not found");
 		} while ((line = buffReader.readLine()) != null) {
 			readedScore = Integer.valueOf(line);
 			scores.add(readedScore);
 			nbScores++;
 		}
+	}
+	
+	public void writeScore2Data(int score) throws IOException {
+		PrintWriter writer = null;
+		try {
+		writer = new PrintWriter(new BufferedWriter(new FileWriter("./resources/ScoreSave.txt" , true)));
+		} catch (FileNotFoundException exc){
+			System.out.println("Opening error, file not found");
+		}
+		writer.println(score+"\n");
 	}
 }
