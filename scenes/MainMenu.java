@@ -54,7 +54,7 @@ public class MainMenu implements Scene {
 		w.background(40);
 		
 		PImage img = w.loadImage("./resources/Tetris_concept.png");
-		w.image(img, 470, 50, img.width/3, img.height/3);
+		w.image(img, 385, 50, img.width/2, img.height/2);
 		
 		playBtn.display();
 		levelBtn.display();
