@@ -5,7 +5,7 @@ import processing.core.PApplet;
 public class GameOverMenu implements Scene{
 
 	@Override
-	public void processInput(PApplet window) {
+	public void processInput() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -17,7 +17,7 @@ public class GameOverMenu implements Scene{
 	}
 
 	@Override
-	public void render(PApplet window) {
+	public void render() {
 		// TODO Auto-generated method stub
 		
 	}

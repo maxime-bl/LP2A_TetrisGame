@@ -13,6 +13,23 @@ public class InputManager {
 	private static Set<Character> keysUp = new HashSet<>();
 	private static Set<Character> keysDown = new HashSet<>();
 	
+	private static boolean mousePressed = false;
+	private static boolean mouseDown = false;
+	private static boolean mouseUp = false;
+	
+	
+	public static void setMousePressed() {
+		if (!mousePressed) {
+			mouseDown = true;
+		}
+		mousePressed = true;
+	}
+	
+	public static void setMouseReleased() {
+		mouseUp = true;
+		mousePressed = false;
+	}
+	
 	
 	public static void setKeyPressed(int keyCode) {	
 		if (!codedKeysPressed.contains(keyCode)) {
@@ -45,6 +62,8 @@ public class InputManager {
 		keysUp.clear();
 		codedKeysDown.clear();
 		keysDown.clear();
+		mouseUp = false;
+		mouseDown = false;
 	}
 	
 	
@@ -73,4 +92,18 @@ public class InputManager {
 	public static boolean getKey(char key) {
 		return keysPressed.contains(Character.toLowerCase(key));
 	}
+
+	public static boolean isMousePressed() {
+		return mousePressed;
+	}
+
+	public static boolean isMouseDown() {
+		return mouseDown;
+	}
+
+	public static boolean isMouseUp() {
+		return mouseUp;
+	}
+	
+	
 }

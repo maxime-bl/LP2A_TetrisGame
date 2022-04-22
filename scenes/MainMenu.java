@@ -5,7 +5,7 @@ import processing.core.PApplet;
 public class MainMenu implements Scene {
 	private int level = 1;
 	@Override
-	public void processInput(PApplet window) {
+	public void processInput() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -17,7 +17,7 @@ public class MainMenu implements Scene {
 	}
 
 	@Override
-	public void render(PApplet window) {
+	public void render() {
 		// TODO Auto-generated method stub
 		
 	}
