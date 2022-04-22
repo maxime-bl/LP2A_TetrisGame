@@ -119,7 +119,7 @@ public class GameScene implements Scene {
 			}
 			
 		
-			if (staticTimer.getElapsedTime() > 1.5 * fallingTime && currentTet.hasCollided(grid)) {
+			if (staticTimer.getElapsedTime() > 1.7 * fallingTime && currentTet.hasCollided(grid)) {
 				//makes static and spawns a new tetromino
 				currentTet.makeStatic(grid);
 				hasSwapped = false;
