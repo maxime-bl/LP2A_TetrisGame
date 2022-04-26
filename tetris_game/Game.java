@@ -1,6 +1,7 @@
 package tetris_game;
 
 import scenes.gamescene.ScoreManager;
+import scenes.gamescene.TimerClock;
 
 import java.util.*;
 
@@ -19,23 +20,33 @@ public class Game extends PApplet{
 		PApplet.main("tetris_game.Game");
 	}
 	
+	/**
+	 * Sets the scene that is updated and rendered on the screen
+	 * @param scene The Scene to set to current
+	 */
 	public static void setCurrentScene(Scene scene) {
 		currentScene = scene;
 	}
 
 	
-	//function that is called before creating the window (PApplet)
+	/**
+	 * Called by the PApplet once, before creating the window
+	 */
 	public void settings() {
 		size(windowWidth, windowHeight);
 	}
 	
-	//called once after the PApplet is created
+	/**
+	 * Called by the PApplet once, after the window was created
+	 */
 	public void setup() {
 		frameRate(60);
 		currentScene = new MainMenu(this);
 	}
 	
-	//called every 1/60 of second
+	/**
+	 * Called by the PApplet 60 times a second (if the frameRate is set 60) after the window was created
+	 */
 	public void draw() {
 		currentScene.processInput();
 		currentScene.update();
@@ -45,7 +56,9 @@ public class Game extends PApplet{
 	}
 	
 	
-	//called every time a key is pressed
+	/**
+	 * Called by the PApplet has long as at least one key of the keyboard is pressed
+	 */
 	public void keyPressed() {
 		if (key == PConstants.CODED) {
 			InputManager.setKeyPressed(this.keyCode);
@@ -54,7 +67,9 @@ public class Game extends PApplet{
 		}
 	}
 	
-	//called once every time a key is released
+	/**
+	 * Called by the PApplet once every time a key of the keyboard is released
+	 */
 	public void keyReleased() {
 		if (key == PConstants.CODED) {
 			InputManager.setKeyReleased(this.keyCode);
@@ -63,13 +78,17 @@ public class Game extends PApplet{
 		}
 	}
 	
-	//called every time a mouse button is pressed
+	/**
+	 * Called by the PApplet once every time a mouse button is pressed
+	 */
 	public void mousePressed() {
 		InputManager.setMousePressed();
 	}
 	
 	
-	//called once every time a mouse buttonn is released
+	/**
+	 * Called by the PApplet once every time a mouse button is released
+	 */
 	public void mouseReleased() {
 		InputManager.setMouseReleased();
 	}
