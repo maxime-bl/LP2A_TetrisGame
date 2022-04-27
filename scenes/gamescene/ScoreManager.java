@@ -20,6 +20,10 @@ public class ScoreManager {
 		this.score = startScore;
 	}
 	
+	/**
+	 * Method used to update the player's score
+	 * @param nbLines: int -> number of line filled
+	 */
 	public void update(int nbLines) {
 		if (nbLines < 4 && nbLines > 0) {
 			this.score += nbLines * 100;

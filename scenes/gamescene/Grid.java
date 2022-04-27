@@ -62,7 +62,7 @@ public class Grid {
 		table.get(posHeight).getLine()[posWidth] = tile;
 	}
 	
-	/*
+	/**
 	 * Method used to check if some grid's lines are full and if the player has lost
 	 * @param scoreManager: ScoreManager -> parameter used to update the score
 	 * @return isLost: boolean

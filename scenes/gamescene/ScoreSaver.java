@@ -30,6 +30,10 @@ public class ScoreSaver {
 		scores.sort(new ScoreComparator());
 	}
 	
+	/**
+	 * Method used to get the 5 best scores of all time
+	 * @return bestScores: ArrayList<Integer>
+	 */
 	public ArrayList<Integer> getBestScores() {
 		try {
 			readFile("./resources/ScoreSave.txt");
@@ -48,6 +52,10 @@ public class ScoreSaver {
 		return bestScores;
 	}
 	
+	/**
+	 * Method used to get the best score
+	 * @return int
+	 */
 	public int getBestScore() {
 		try {
 			readFile("./resources/ScoreSave.txt");
@@ -84,6 +92,7 @@ public class ScoreSaver {
 	
 	public void writeScore2Data(int score) throws IOException {
 		FileWriter fw = null;
+		// Initialization
 		try {
 		fw = new FileWriter("./resources/ScoreSave.txt", true);
 		} catch (FileNotFoundException exc){

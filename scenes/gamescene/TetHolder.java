@@ -12,7 +12,7 @@ public class TetHolder {
 		tetInHold = null;
 	}
 	
-	/*
+	/**
 	 * Switch between the tetromino in the holder and the current one
 	 * @current : the current tetromino
 	 * @return : a tetromino if there is one in the holder, null else

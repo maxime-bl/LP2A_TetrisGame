@@ -1,6 +1,5 @@
 package scenes.gamescene;
 
-import processing.core.*;
 import java.lang.Math;
 
 public class TimerClock {
