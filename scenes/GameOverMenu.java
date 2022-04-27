@@ -4,11 +4,9 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 import scenes.gamescene.GameScene;
-import scenes.gamescene.ScoreManager;
 import scenes.gamescene.ScoreSaver;
 import tetris_game.Game;
 import utils.Button;
-import utils.Color;
 import utils.ColorConstants;
 import utils.Button.ButtonMode;
 

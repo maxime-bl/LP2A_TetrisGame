@@ -1,15 +1,8 @@
 package tetris_game;
 
-import scenes.gamescene.ScoreManager;
-import scenes.gamescene.TimerClock;
-
-import java.util.*;
-
 import processing.core.*;
 import scenes.MainMenu;
 import scenes.*;
-import tetrominos.*;
-import tiles.*;
 import utils.*;
 
 public class Game extends PApplet{

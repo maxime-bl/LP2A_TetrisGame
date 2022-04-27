@@ -1,7 +1,5 @@
 package scenes;
 
-import processing.core.PApplet;
-
 public interface Scene {
 	/**
 	 * Processes all the keyboard and mouse inputs from the user
