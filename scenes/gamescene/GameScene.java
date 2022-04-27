@@ -1,7 +1,6 @@
 package scenes.gamescene;
 
 import java.io.IOException;
-import java.util.*;
 
 import processing.core.PApplet;
 import processing.core.PConstants;

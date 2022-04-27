@@ -62,6 +62,11 @@ public class Grid {
 		table.get(posHeight).getLine()[posWidth] = tile;
 	}
 	
+	/*
+	 * Method used to check if some grid's lines are full and if the player has lost
+	 * @param scoreManager: ScoreManager -> parameter used to update the score
+	 * @return isLost: boolean
+	 */
 	public boolean checkLines(ScoreManager scoreManager) {
 		int nbLines = 0;
 		int index = 0;
@@ -70,6 +75,7 @@ public class Grid {
 		boolean isLost = false;
 		
 		for (Line l: table) {
+			// Check the 20 firsts lines
 			if (index < 20) {
 				for (int i = 0; i < this.width; i++) {
 					if (l.getLine()[i].isNull()) {
@@ -82,6 +88,7 @@ public class Grid {
 				}
 				isFull = true;
 				index++;
+			// Check the 3 additional lines
 			} else {
 				for (int i = 0; i < this.width; i++) {
 					if ( l.getLine()[i].isNull() == false) {
@@ -90,6 +97,7 @@ public class Grid {
 				}
 			}
 		}
+
 		if (!toSuppr.isEmpty()) {
 			for (int i = toSuppr.size()-1; i >= 0; i--) {
 				Line newLine = new Line(this.width);
