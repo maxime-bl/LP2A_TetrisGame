@@ -1,7 +1,5 @@
 package tetrominos;
 
-import java.util.Iterator;
-
 import scenes.gamescene.Grid;
 import tiles.FallingTile;
 import utils.*;
@@ -18,7 +16,7 @@ public class TetO extends Tetromino {
 
 	@Override
 	public void rotate(int direction, Grid grid) {
-		
+		// The coordinates of the tetromino O aren't modified when it's rotated.
 	}
 
 	@Override

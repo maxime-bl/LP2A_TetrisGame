@@ -11,6 +11,9 @@ import tiles.Tile;
 
 public abstract class Tetromino {
 	
+	/*
+	 * Datas for the wall kicks
+	 */
 	private final static HashMap<String, Vector> wallKickDataJLTSZ;
 	
 	static {
@@ -85,6 +88,11 @@ public abstract class Tetromino {
 		return this.color;
 	}
 	
+	/*
+	 * Method used to check if a tetromino has collided with other tiles
+	 * @param grid: the actual game grid
+	 * @return isColliding: boolean
+	 */
 	public boolean hasCollided(Grid grid) {
 		boolean isColliding = false;
 		
@@ -193,6 +201,11 @@ public abstract class Tetromino {
 		}
 	}
   
+	/*
+	 * Method used to make a tetromino fall of 1 case
+	 * @param grid : the actual game grid
+	 * @return boolean: true = tetromino fell of 1 case, false = it didn't fall
+	 */
 	public boolean fall(Grid grid) {
 		if (this.hasCollided(grid) == false) {
 			for (FallingTile fallingTile : tiles) {
@@ -204,6 +217,14 @@ public abstract class Tetromino {
 		}
 	}
 	
+	/*
+	 * As the tetromino spawn outside the grid, this method is used to fix the height of spawn of the tetromino.
+	 * Note :
+	 * If the tetromino can't spawn totally inside the grid, then it spawn if possible 1 line upper. If it can't spawn 1
+	 * line upper, then we make it spawn 2 lines upper.
+	 * @param grid : the actual game grid 
+	 * @return boolean
+	 */
 	public boolean fixDefaultHeight(Grid grid) {
 		if (this.fall(grid)) {
 			this.fall(grid);
@@ -214,10 +235,17 @@ public abstract class Tetromino {
 		
 	}
 	
+	/*
+	 * Method used to check if an horizontal movement in a particular direction is possible
+	 * @param direction: int
+	 * @param grid : the actual game grid
+	 * @return boolean: true if the movement is possible, false else
+	 */
 	protected boolean horizontalMoveCheck(int direction, Grid grid) {
 		Tetromino preview = this.clone();
 		boolean isPossible = true;
 		
+		// Check if a translation to the right is possible
 		if (direction == 1) {
 			preview.moveRight();
 			for (FallingTile fallingTile : preview.tiles) {
@@ -230,6 +258,7 @@ public abstract class Tetromino {
 					isPossible = false;
 				}
 			}
+		// Check if a translation to the left is possible
 		} else if (direction == -1) {
 			preview.moveLeft();
 			for (FallingTile fallingTile : preview.tiles) {
@@ -246,6 +275,10 @@ public abstract class Tetromino {
 		return isPossible;
 	}
 	
+	/*
+	 * Method used to move the tetromino to the right
+	 * @param grid: the actual game grid
+	 */
 	public void moveRight(Grid grid) {
 		if (this.horizontalMoveCheck(1, grid)) {
 			for (FallingTile fallingTile : tiles) {
@@ -254,6 +287,10 @@ public abstract class Tetromino {
 		}
 	}
 	
+	/*
+	 * Method used to move the tetromino to the left
+	 * @param grid: the actual game grid
+	 */
 	public void moveLeft(Grid grid) {
 		if (this.horizontalMoveCheck(-1, grid)) {
 			for (FallingTile fallingTile : tiles) {
@@ -262,18 +299,28 @@ public abstract class Tetromino {
 		}
 	}
 	
+	/*
+	 * Method to move to the right a preview of a tetromino
+	 */
 	protected void moveRight() {
 		for (FallingTile fallingTile : tiles) {
 			fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()+1);
 		}
 	}
 	
+	/*
+	 * Method to move to the left a preview of a tetromino
+	 */
 	protected void moveLeft() {
 		for (FallingTile fallingTile : tiles) {
 			fallingTile.getCoordinates().setX(fallingTile.getCoordinates().getX()-1);
 		}
 	}
 	
+	/*
+	 * Method used to fix the tetromino inside the grid
+	 * @param grid: the actual grid
+	 */
 	public void makeStatic(Grid grid) {
 		for (FallingTile fallingTile : tiles) {
 			grid.setTile(fallingTile.getCoordinates().getX(), fallingTile.getCoordinates().getY(), fallingTile);
@@ -293,7 +340,11 @@ public abstract class Tetromino {
 			}
 		}
 	}
-		public void displayHolder(PApplet w) {
+	
+	/*
+	 * Method used to display a tetromino in a sidebar
+	 */
+	public void displayHolder(PApplet w) {
 		for (FallingTile t : tiles) {			
 			int x = centerTile.getCoordinates().getX();
 			int y = centerTile.getCoordinates().getY();
@@ -308,6 +359,9 @@ public abstract class Tetromino {
 		}
 	}
 	
+	/*
+	 * Method used to display the falling tetromino ghost
+	 */
 	public void displayGhost(PApplet w, Grid grid) {
 		Tetromino preview = this.clone();
 		preview.hardDrop(grid);
@@ -333,5 +387,8 @@ public abstract class Tetromino {
 		}
 	}
 	
+	/*
+	 * Method used to clone a tetromino
+	 */
 	protected abstract Tetromino clone();
 }
