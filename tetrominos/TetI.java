@@ -129,7 +129,7 @@ public class TetI extends Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * Method used to rotate a tetromino
 	 * @param direction: int --> -1: anti-clockwise, 1: clockwise
 	 * @param grid: the actual game grid

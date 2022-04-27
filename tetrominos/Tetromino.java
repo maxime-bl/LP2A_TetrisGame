@@ -88,7 +88,7 @@ public abstract class Tetromino {
 		return this.color;
 	}
 	
-	/*
+	/**
 	 * Method used to check if a tetromino has collided with other tiles
 	 * @param grid: the actual game grid
 	 * @return isColliding: boolean
@@ -110,7 +110,7 @@ public abstract class Tetromino {
 		return isColliding;
 	}
 	
-	/*
+	/**
 	 * Method used to rotate a tetromino
 	 * @param direction: int --> -1: anti-clockwise, 1: clockwise
 	 * @param grid: the actual game grid
@@ -201,7 +201,7 @@ public abstract class Tetromino {
 		}
 	}
   
-	/*
+	/**
 	 * Method used to make a tetromino fall of 1 case
 	 * @param grid : the actual game grid
 	 * @return boolean: true = tetromino fell of 1 case, false = it didn't fall
@@ -217,7 +217,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * As the tetromino spawn outside the grid, this method is used to fix the height of spawn of the tetromino.
 	 * Note :
 	 * If the tetromino can't spawn totally inside the grid, then it spawn if possible 1 line upper. If it can't spawn 1
@@ -235,7 +235,7 @@ public abstract class Tetromino {
 		
 	}
 	
-	/*
+	/**
 	 * Method used to check if an horizontal movement in a particular direction is possible
 	 * @param direction: int
 	 * @param grid : the actual game grid
@@ -275,7 +275,7 @@ public abstract class Tetromino {
 		return isPossible;
 	}
 	
-	/*
+	/**
 	 * Method used to move the tetromino to the right
 	 * @param grid: the actual game grid
 	 */
@@ -287,7 +287,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * Method used to move the tetromino to the left
 	 * @param grid: the actual game grid
 	 */
@@ -299,7 +299,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * Method to move to the right a preview of a tetromino
 	 */
 	protected void moveRight() {
@@ -308,7 +308,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * Method to move to the left a preview of a tetromino
 	 */
 	protected void moveLeft() {
@@ -317,7 +317,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * Method used to fix the tetromino inside the grid
 	 * @param grid: the actual grid
 	 */
@@ -341,7 +341,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * Method used to display a tetromino in a sidebar
 	 */
 	public void displayHolder(PApplet w) {
@@ -359,7 +359,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * Method used to display the falling tetromino ghost
 	 */
 	public void displayGhost(PApplet w, Grid grid) {
@@ -387,7 +387,7 @@ public abstract class Tetromino {
 		}
 	}
 	
-	/*
+	/**
 	 * Method used to clone a tetromino
 	 */
 	protected abstract Tetromino clone();
