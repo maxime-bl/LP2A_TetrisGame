@@ -142,7 +142,7 @@ public class GameScene implements Scene {
 			
 			
 			if (gameover) {
-				clock.setFinish(true);
+				clock.setFinished();
 				try {
 					scoreManager.saver.writeScore2Data(scoreManager.getScore());
 				} catch (IOException io) {

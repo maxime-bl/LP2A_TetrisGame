@@ -18,6 +18,10 @@ public class TetQueue {
 		queue.addAll(generate7Bag());
 	}
 
+	/**
+	 * Returns the next Tetromino in the queue and removes it from the queue.
+	 * @return the Tetromino in the front of the queue.
+	 */
 	public Tetromino getNext() {
 		Tetromino nextTet = queue.remove();
 		if (queue.size() < this.size) {
@@ -26,7 +30,10 @@ public class TetQueue {
 		return nextTet;
 	}
 	
-	
+	/**
+	 * Generates a new set containing one of each of the seven Tetrominos, in a random order 
+	 * @return A HashSet of 7 Tetrominos
+	 */
 	public static HashSet<Tetromino> generate7Bag() {
 		HashSet<Tetromino> bag = new HashSet<>();
 		bag.add(new TetI());
@@ -41,7 +48,10 @@ public class TetQueue {
 	}
 	
 
-	
+	/**
+	 * Displays on the screen the next Tetrominos in the queue. The number of pieces to display is defined by the "size" variable.
+	 * @param w The PApplet to display the queue on
+	 */
 	public void display(PApplet w) {
 		int r = ColorConstants.CYAN.getRed();
 		int g = ColorConstants.CYAN.getGreen();

@@ -49,6 +49,9 @@ public class Button {
 		this.color = color;
 	}
 	
+	/**
+	 * Displays the button on the window
+	 */
 	public void display() {
 		PFont font;
 		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
@@ -98,41 +101,68 @@ public class Button {
 		  return w.textAscent()+w.textDescent();
 		}
 
+	/**
+	 * Tells if the button is currently being pressed by the user
+	 * @return true if the cursor is over the button and one of the mouse button is pressed, false otherwise
+	 */
 	public boolean isPressed() {
 	    return isHovered() && InputManager.isMousePressed() && w.focused;
 	  }
 
+	/**
+	 * Tells if the button has just been released by the user
+	 * @return true if the cursor is over the button and one of the mouse button has just been released, false otherwise
+	 */
+	public boolean isReleased() {
+		return isHovered() && InputManager.isMouseUp() && w.focused;
+	}
 
-	  public boolean isReleased() {
-	    return isHovered() && InputManager.isMouseUp() && w.focused;
-	  }
+	/**
+	 * Tells if the button has just been pressed by the user
+	 * @return true if the cursor is over the button and one of the mouse button has just been pressed, false otherwise
+	 */
+	public boolean isClicked() {
+		return isHovered() && InputManager.isMouseDown() && w.focused;
+	}
 
-	  public boolean isClicked() {
-	    return isHovered() && InputManager.isMouseDown() && w.focused;
-	  }
-
-
-	  public boolean isHovered() {
-	    if (mode == PConstants.CENTER) {
-	      return w.mouseX>x-this.width/2 && w.mouseX<x+this.width/2 && w.mouseY>y-this.height/2 && w.mouseY<y+this.height/2;
+	/**
+	 * Tells if the user is hovering the button with the mouse
+	 * @return true if the mouse cursor is inside the boundaries of the button, false otherwise
+	 */
+	public boolean isHovered() {
+		if (mode == PConstants.CENTER) {
+			return w.mouseX>x-this.width/2 && w.mouseX<x+this.width/2 && w.mouseY>y-this.height/2 && w.mouseY<y+this.height/2;
 	    } else {
-	      return w.mouseX>x && w.mouseX<x+this.width && w.mouseY>y && w.mouseY<y+this.height;
+	    	return w.mouseX>x && w.mouseX<x+this.width && w.mouseY>y && w.mouseY<y+this.height;
 	    }
-	  }
+	}
 	  
-	  public void setMode(ButtonMode mode) {
-		    if (mode == ButtonMode.CENTER) {
-		    	this.mode = PConstants.CENTER;
-		    } else {
-		    	this.mode = PConstants.CORNER;
-		    }
-	  }
+	/**
+	 * Sets the coordinates mode of the button to either CENTER or CORNER
+	 * <p>
+	 * In CORNER mode, the x and y coordinates of the button are interpreted as the coordinates of its top-left corner.
+	 * <p>
+	 * In CENTER mode, the x and y coordinates of the button are interpreted as the coordinates of its center point.
+	 * 
+	 * @param mode either CENTER or CORNER
+	 */
+	public void setMode(ButtonMode mode) {
+		if (mode == ButtonMode.CENTER) {
+			this.mode = PConstants.CENTER;
+		} else {
+			this.mode = PConstants.CORNER;
+		}
+	}
 	  
-	  public enum ButtonMode{
-		  CENTER, CORNER;
-	  }
+	public enum ButtonMode{
+		CENTER, CORNER;
+	}
 	  
-	  public void setText(String text) {
-		  this.text = text;
-	  }
+	/**
+	 * Sets the text displayed on the button
+	 * @param text String to write on the button when display() is called
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
 }
