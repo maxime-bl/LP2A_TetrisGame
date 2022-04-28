@@ -1,6 +1,12 @@
-# Tetris Java project - LP2A (P22)
+# <center>Tetris Java project - LP2A (P22)</center>
 
-### Flavian Theurel - Maxime Blanchard
+## 0 - Run instructions
+
+> - Télécharger Processing 3.5.4 (<a href="https://processing.org/download">Télécharger</a>)
+> - Uncompress the .zip file
+> - Drag click "Processing\processing-3.5.4\core\library\core.jar" to the project on eclipse
+> - Right click on the core.jar then select Build Path -> Add to Build Path
+> - You can now run the game.java file
 
 ## 1 - The GUI API (Processing)
 
@@ -10,7 +16,7 @@ Processing comes with its own IDE and is meant to be used as a "standalone" lang
 
 ## 2 - The interface
 
-The interface of our game is mostly inspired by Tetris 99 ....
+The interface of our game is mostly inspired by Tetris 99. It's the most recent Tetris game playable.
 
 ## 3 - Program main structure
 
