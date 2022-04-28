@@ -31,12 +31,6 @@ public class GameOverMenu implements Scene{
 
 	@Override
 	public void processInput() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update() {
 		if (restartBtn.isReleased()) {
 			Game.setCurrentScene(new GameScene(w, level));
 		} 
@@ -45,7 +39,12 @@ public class GameOverMenu implements Scene{
 		}
 		if(quitBtn.isReleased()) {
 			w.exit();
-		}
+		}		
+	}
+
+	@Override
+	public void update() {
+		
 	}
 
 	@Override

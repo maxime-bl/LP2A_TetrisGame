@@ -53,13 +53,13 @@ public class Button {
 	 * Displays the button on the window
 	 */
 	public void display() {
-		PFont font;
-		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
+		PFont font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
 		
 		w.push();
 		
 		w.noStroke();
 		w.rectMode(mode);
+		w.textFont(font);
 		w.textAlign(PConstants.CENTER, PConstants.TOP);
 	
 		w.fill(color.getRed(), color.getGreen(), color.getBlue());
@@ -86,12 +86,12 @@ public class Button {
 	    if (mode == PConstants.CENTER) {
 	    	w.rect(x,y,width-10,height-10,9);
 	    	w.fill(255);
-	    	w.text(text, x, y-getTextHeight()/2);
+	    	w.text(text, x, y-getTextHeight()/2+1);
 	    }
 	    else {
 	    	w.rect(5+x,5+y,width-10,height-10,9);
 	    	w.fill(255);
-	    	w.text(text, x+this.width/2, y+(this.height-getTextHeight())/2);
+	    	w.text(text, x+this.width/2, y+(this.height-getTextHeight())/2+2);
 	    }
 		
 		w.pop();

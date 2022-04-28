@@ -1,5 +1,7 @@
 package scenes;
 
+import java.util.Random;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
@@ -31,12 +33,6 @@ public class MainMenu implements Scene {
 	
 	@Override
 	public void processInput() {
-		
-	}
-
-	
-	@Override
-	public void update() {
 		if (playBtn.isReleased()) {
 			Game.setCurrentScene(new GameScene(w, level));
 		} 
@@ -50,6 +46,12 @@ public class MainMenu implements Scene {
 		if(quitBtn.isReleased()) {
 			w.exit();
 		}
+	}
+
+	
+	@Override
+	public void update() {
+		
 	}
 
 	@Override
