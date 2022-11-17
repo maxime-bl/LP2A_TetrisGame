@@ -10,7 +10,7 @@ Since we are using the Processing API, the Game class had to placed be inside a 
 
 ## How to run
 
-To execute properly the code, you need to compile and launch **Game.java** from **./src** directory.
+To execute properly the code, you need to compile and launch **Game.java** from **the parent directory of src and resources**.
 
 ## Documentation
 
