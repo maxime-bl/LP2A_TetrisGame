@@ -7,7 +7,7 @@ public interface Scene {
 	abstract void processInput();
 	
 	/**
-	 * Updates the elements of the scene which need to be updated regularily
+	 * Updates the elements of the scene which need to be updated regularly
 	 */
 	abstract void update();
 	

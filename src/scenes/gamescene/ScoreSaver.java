@@ -36,7 +36,7 @@ public class ScoreSaver {
 	 */
 	public ArrayList<Integer> getBestScores() {
 		try {
-			readFile("./resources/ScoreSave.txt");
+			readFile("../resources/ScoreSave.txt");
 		} catch (IOException e) {
 			System.out.println("The file can't be read");
 		}
@@ -58,7 +58,7 @@ public class ScoreSaver {
 	 */
 	public int getBestScore() {
 		try {
-			readFile("./resources/ScoreSave.txt");
+			readFile("../resources/ScoreSave.txt");
 		} catch (IOException e) {
 			System.out.println("The file can't be read");
 		}
@@ -94,7 +94,7 @@ public class ScoreSaver {
 		FileWriter fw = null;
 		// Initialization
 		try {
-		fw = new FileWriter("./resources/ScoreSave.txt", true);
+		fw = new FileWriter("../resources/ScoreSave.txt", true);
 		} catch (FileNotFoundException exc){
 			System.out.println("Opening error, file not found");
 		}
@@ -104,7 +104,7 @@ public class ScoreSaver {
 	
 	public void displayBestScores(PApplet w) {
 		PFont font;
-		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
+		font = w.loadFont("../resources/Ebrima-Bold-48.vlw");
 		ArrayList<Integer> bestScores = this.getBestScores();
 		
 		w.push();

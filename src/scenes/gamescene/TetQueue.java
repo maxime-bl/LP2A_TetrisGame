@@ -58,7 +58,7 @@ public class TetQueue {
 		int b = ColorConstants.CYAN.getBlue();
 		
 		PFont font;
-		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
+		font = w.loadFont("../resources/Ebrima-Bold-48.vlw");
 				
 		w.push();
 		w.noStroke();

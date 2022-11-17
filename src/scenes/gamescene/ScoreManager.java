@@ -45,7 +45,7 @@ public class ScoreManager {
 	
 	public void display(PApplet w) {
 		PFont font;
-		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
+		font = w.loadFont("../resources/Ebrima-Bold-48.vlw");
 		
 		w.noStroke();
 		w.push();

@@ -56,7 +56,7 @@ public class GameOverMenu implements Scene{
 		
 		w.push();
 		PFont font;
-		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
+		font = w.loadFont("../resources/Ebrima-Bold-48.vlw");
 		
 		w.translate(w.width/2, 180);
 		w.noStroke();

@@ -50,7 +50,7 @@ public class Game extends PApplet{
 	
 	
 	/**
-	 * Called by the PApplet has long as at least one key of the keyboard is pressed
+	 * Called by the PApplet as long as at least one key of the keyboard is pressed
 	 */
 	public void keyPressed() {
 		if (key == PConstants.CODED) {

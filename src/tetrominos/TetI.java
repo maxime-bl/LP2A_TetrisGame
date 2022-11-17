@@ -8,7 +8,7 @@ import utils.*;
 
 public class TetI extends Tetromino {
 	
-	//Standard rotation vector contants
+	//Standard rotation vector contents
 	private static final HashMap<String, Vector> rotationVectors = new HashMap<String, Vector>();
 		
 	static {
