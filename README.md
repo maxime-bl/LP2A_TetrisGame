@@ -2,7 +2,7 @@
 
 ## Compiling requirements 
 
-To compile this program you need JDK17. Moreover, you'll have to add the Processing libraries as a module. To do this, add **core.jar** in the project dependencies.
+To compile this program you need JDK17. Moreover, you'll have to add the Processing libraries as a module. To do this, add **core.jar** from your Processing repertory in the project dependencies.
 
 ## Game class location
 
