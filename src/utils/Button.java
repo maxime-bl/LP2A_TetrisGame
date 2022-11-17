@@ -53,7 +53,7 @@ public class Button {
 	 * Displays the button on the window
 	 */
 	public void display() {
-		PFont font = w.loadFont("../resources/Ebrima-Bold-48.vlw");
+		PFont font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
 		
 		w.push();
 		

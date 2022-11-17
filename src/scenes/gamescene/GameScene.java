@@ -190,7 +190,7 @@ public class GameScene implements Scene {
 	
 	private void displayInfo(PApplet w, String name, String value) {
 		PFont font;
-		font = w.loadFont("../resources/Ebrima-Bold-48.vlw");
+		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
 		
 		w.noStroke();
 		w.push();
@@ -228,7 +228,7 @@ public class GameScene implements Scene {
 		int b = ColorConstants.CYAN.getBlue();
 		
 		PFont font;
-		font = w.loadFont("../resources/Ebrima-Bold-48.vlw");
+		font = w.loadFont("./resources/Ebrima-Bold-48.vlw");
 				
 		w.push();
 		w.noStroke();

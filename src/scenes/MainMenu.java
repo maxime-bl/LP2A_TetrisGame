@@ -28,7 +28,7 @@ public class MainMenu implements Scene {
 		levelBtn = new Button(w.width/2 + 60, 530, 120, 45, "LEVEL : " + level, w, ButtonMode.CENTER, new Color(200,200,200));
 		quitBtn = new Button(w.width/2, 590, 240, 45, "QUIT GAME", w, ButtonMode.CENTER, ColorConstants.RED);
 		scoreSaver = new ScoreSaver();
-		img = w.loadImage("../resources/Tetris_concept.png");
+		img = w.loadImage("./resources/Tetris_concept.png");
 	}
 	
 	@Override
